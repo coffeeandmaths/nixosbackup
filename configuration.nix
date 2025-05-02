@@ -4,10 +4,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./modules/hardware-configuration.nix
-      #./modules/gnome-prune.nix
-      #./modules/gnome.nix
-       ./modules/plasma.nix
-       ./modules/networking.nix
       ./modules/gnome-prune.nix
       ./modules/gnome.nix
       ./modules/networking.nix
