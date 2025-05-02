@@ -69,9 +69,6 @@
     wget
     git
     home-manager  
-    gcc
-    python3
-
    ];
 
   #  Wide settings

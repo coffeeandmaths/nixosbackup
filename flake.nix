@@ -17,6 +17,22 @@
       pkgs = nixpkgs.legacyPackages.${system};
       lib = nixpkgs.lib;
     in {
+
+  # --- Added: Python dev shell with JupyterLab ---
+  devShells.x86_64-linux.python-ui = pkgs.mkShell {
+    name = "python-ui";
+    buildInputs = [
+      pkgs.python3
+      pkgs.python3Packages.jupyterlab
+    ];
+
+    shellHook = ''
+      echo "🚀 Run: jupyter-lab"
+      echo "🌐 Then open the link in your browser."
+    '';
+  };
+  # --- End added section ---
+
         #-----------------NIXOS-------------------
           nixosConfigurations = {
              "nixos" = lib.nixosSystem {  

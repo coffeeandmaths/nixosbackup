@@ -18,7 +18,6 @@
   powerline-fonts
   calibre
   firefox
-  jetbrains.pycharm-community-bin
   obsidian
   ];
      
