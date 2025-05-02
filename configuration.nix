@@ -4,16 +4,13 @@
   imports =
     [ # Include the results of the hardware scan.
       ./modules/hardware-configuration.nix
-<<<<<<< HEAD
       #./modules/gnome-prune.nix
       #./modules/gnome.nix
        ./modules/plasma.nix
        ./modules/networking.nix
-=======
       ./modules/gnome-prune.nix
       ./modules/gnome.nix
       ./modules/networking.nix
->>>>>>> 0a93179 (Original)
     ];
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
@@ -76,11 +73,9 @@
     wget
     git
     home-manager  
-<<<<<<< HEAD
     gcc
-=======
     python3
->>>>>>> 0a93179 (Original)
+
    ];
 
   #  Wide settings
