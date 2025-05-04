@@ -8,10 +8,10 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    nvf.url = "github:notashelf/nvf";
   };
 
-  outputs = { nixpkgs, home-manager, self, ... }:
+  outputs = { nixpkgs, home-manager, self, nvf, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -21,14 +21,17 @@
   # --- Added: Python dev shell with JupyterLab ---
   devShells.x86_64-linux.python-ui = pkgs.mkShell {
     name = "python-ui";
-    buildInputs = [
-      pkgs.python3
-      pkgs.python3Packages.jupyterlab
+      buildInputs = [
+        pkgs.python3
+        pkgs.python3Packages.jupyterlab
+        # Add nvf from the flake input
+        nvf.packages.${system}.default
     ];
 
     shellHook = ''
       echo "🚀 Run: jupyter-lab"
       echo "🌐 Then open the link in your browser."
+      echo "📝 nvf is available: try running 'nvf --help'"
     '';
   };
   # --- End added section ---

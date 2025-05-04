@@ -5,7 +5,7 @@
 
     plugins = with pkgs.vimPlugins; [
       vim-nix    # Syntax highlighting for .nix
-      vim-airline
+      vimtex
     ];
 
     settings = {
@@ -27,6 +27,10 @@
 
       " Use quickfix for errors
       set errorformat=%f:%l:%c:\ %m
+ 
+      " VimTeX configuration
+      let g:vimtex_view_method = 'zathura'
+      let g:vimtex_compiler_method = 'tectonic'
     '';
   };
 }

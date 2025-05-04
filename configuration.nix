@@ -7,6 +7,7 @@
       ./modules/gnome-prune.nix
       ./modules/gnome.nix
       ./modules/networking.nix
+      ./modules/nvf-configuration.nix
     ];
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
   

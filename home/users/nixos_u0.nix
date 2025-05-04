@@ -9,17 +9,19 @@
 
 #    ../modules/starship.nix
     ../modules/bash.nix
-    ../modules/vim.nix
     ../modules/bash.nix
     ../modules/git.nix
+      
   ];
   home.packages = with pkgs; [
-  nerdfonts
-  powerline-fonts
-  calibre
-  firefox
-  obsidian
-  ];
+    nerdfonts
+    powerline-fonts
+    firefox
+    ghostty
+    texlive.combined.scheme-medium
+    tectonic
+    zathura
+   ];
      
  
 
