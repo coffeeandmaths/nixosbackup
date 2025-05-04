@@ -43,6 +43,7 @@
                  modules = [
                     
                     ./configuration.nix
+                    ./nvf-configuration.nvf
 
                     #-----HOME MANAGER MODULES----------------
                     home-manager.nixosModules.home-manager
