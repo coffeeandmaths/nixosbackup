@@ -4,10 +4,10 @@
   imports =
     [ # Include the results of the hardware scan.
       ./modules/hardware-configuration.nix
-      ./modules/gnome-prune.nix
-      ./modules/gnome.nix
+      ./modules/plasma.nix
+     # ./modules/gnome-prune.nix
+     # ./modules/gnome.nix
       ./modules/networking.nix
-      ./modules/nvf-configuration.nix
     ];
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
@@ -60,7 +60,7 @@
   users.users.nixos_u0 = {
     isNormalUser = true;
     description = "Ramon Armeria";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "lp" "lpadmin"];
     packages = with pkgs; [
        
     ];
@@ -72,12 +72,37 @@
     home-manager  
    ];
 
-  #  Wide settings
-  nixpkgs.config.allowUnfree = true;
+   #  Wide settings
+
+   # Enable CUPS printing
+     services.printing.enable = true;
+
+   # Use HPLIP with the plugin for HP support (e.g., scanning or proprietary features)
+     services.printing.drivers = [ pkgs.hplipWithPlugin ];
+     services.printing.browsing = true;
+     services.printing.defaultShared = true;
+     # Optional but recommended
+     hardware.printers.ensurePrinters = [];
+   # Enable scanner support
+     hardware.sane.enable = true;
+
+   # Allow network printer discovery via mDNS/Avahi
+     services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+     };
+
+   # Allow the CUPS web interface through the firewall
+     networking.firewall.allowedTCPPorts = [ 631 ];
+
+
+    nixpkgs.config.allowUnfree = true;
   
-  system.stateVersion = "24.11"; # Did you read the comment?
+    system.stateVersion = "24.11"; # Did you read the comment?
   
-  environment.shells = with pkgs; [ bash ];
+    environment.shells = with pkgs; [ bash ];
   
-  users.defaultUserShell = pkgs.bash;
-}
+    users.defaultUserShell = pkgs.bash;
+
+  }

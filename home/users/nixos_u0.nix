@@ -11,6 +11,7 @@
     ../modules/bash.nix
     ../modules/bash.nix
     ../modules/git.nix
+    ../modules/vim.nix
       
   ];
   home.packages = with pkgs; [
@@ -18,9 +19,12 @@
     powerline-fonts
     firefox
     ghostty
-    texlive.combined.scheme-medium
+    texlive.combined.scheme-full
     tectonic
+    kile
     zathura
+    obsidian
+    libreoffice
    ];
      
  

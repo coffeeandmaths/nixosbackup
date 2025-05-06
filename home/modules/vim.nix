@@ -6,6 +6,7 @@
     plugins = with pkgs.vimPlugins; [
       vim-nix    # Syntax highlighting for .nix
       vimtex
+      gruvbox
     ];
 
     settings = {
@@ -27,8 +28,15 @@
 
       " Use quickfix for errors
       set errorformat=%f:%l:%c:\ %m
+      
+      " Theme
+       colorscheme gruvbox
+        set background=dark
  
       " VimTeX configuration
+      
+      " Disable auto-opening of quickfix window after LaTeX compilation
+       let g:vimtex_quickfix_mode = 0
       let g:vimtex_view_method = 'zathura'
       let g:vimtex_compiler_method = 'tectonic'
     '';

@@ -12,5 +12,6 @@
     gnome-maps
     gnome-music
     totem
+    evince
   ];
 }

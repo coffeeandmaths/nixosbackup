@@ -25,7 +25,7 @@
         pkgs.python3
         pkgs.python3Packages.jupyterlab
         # Add nvf from the flake input
-        nvf.packages.${system}.default
+        
     ];
 
     shellHook = ''
@@ -41,9 +41,7 @@
              "nixos" = lib.nixosSystem {  
                  inherit system;
                  modules = [
-                    
                     ./configuration.nix
-                    ./nvf-configuration.nvf
 
                     #-----HOME MANAGER MODULES----------------
                     home-manager.nixosModules.home-manager
