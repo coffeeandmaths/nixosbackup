@@ -21,9 +21,9 @@
     ghostty
     texlive.combined.scheme-full
     tectonic
-    kile
     zathura
     obsidian
+    texstudio
     libreoffice
    ];
      
