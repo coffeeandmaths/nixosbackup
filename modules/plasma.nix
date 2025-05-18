@@ -16,6 +16,8 @@
   
   # Optional: Additional GNOME packages
   environment.systemPackages = with pkgs; [
+  kdePackages.partitionmanager
+  kdePackages.isoimagewriter
   ];
 
   # Optionally set default session (if needed)

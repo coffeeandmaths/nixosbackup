@@ -25,6 +25,7 @@
     obsidian
     texstudio
     libreoffice
+
    ];
      
  
