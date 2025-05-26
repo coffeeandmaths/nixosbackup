@@ -70,10 +70,9 @@
     wget
     git
     home-manager  
-   ];
+    ];
 
    #  Wide settings
-
    # Enable CUPS printing
      services.printing.enable = true;
 
@@ -98,8 +97,8 @@
 
 
     nixpkgs.config.allowUnfree = true;
-  
-    system.stateVersion = "24.11"; # Did you read the comment?
+
+    system.stateVersion = "25.05"; # Did you read the comment?
   
     environment.shells = with pkgs; [ bash ];
   

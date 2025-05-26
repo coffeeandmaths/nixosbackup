@@ -4,7 +4,7 @@
    
   home.username = "nixos_u0";
   home.homeDirectory = "/home/nixos_u0";
-  home.stateVersion = "24.11"; 
+  home.stateVersion = "25.05";
   imports = [
 
 #    ../modules/starship.nix
@@ -15,7 +15,7 @@
       
   ];
   home.packages = with pkgs; [
-    nerdfonts
+    nerd-fonts.jetbrains-mono
     powerline-fonts
     firefox
     ghostty

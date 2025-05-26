@@ -14,4 +14,5 @@
     ExecStart = "${pkgs.systemd}/bin/systemctl restart NetworkManager.service";
   };
  };
+
  }
