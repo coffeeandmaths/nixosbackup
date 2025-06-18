@@ -17,14 +17,21 @@
 
 \begin{document}
 	
-	\section*{Probability review}
+	\section*{Probabilities}
 	
 	% Begin Cornell layout
 	\begin{minipage}[t]{0.4\textwidth}
 		%Left side
 		\textbf{}
 		\vspace{0.3cm}
-		
+		\textbf{Axioms of Probability}
+		\begin{enumerate}
+			\item For any event $A$, $0 \leq P(A) \geq 1$.
+			\item $\Omega \in \mathcal{F} \Rightarrow P(\Omega) = 1$
+			\item $P(\cup_i A_i) = \sum_i P(A_i)$
+		\end{enumerate}
+		\vspace{0.3cm}
+		Where $\mathcal{F}$ is the \textit{domain} of the probability measue $P$
 		 
 		 
 	\end{minipage}
@@ -34,6 +41,23 @@
 		\textbf{Introduction}
 		\vspace{0.3cm}\\
 		
+\begin{itemize}
+	\item Experiment : Process whose outcome is not know in advance.
+	\item Sample space : Set $\Omega$ of all \textit{possible} outcomes from the experiment.
+	\item Event : Subset of $\Omega$ . \textit{Statement} about the outcome of an experiment. 
+\end{itemize}
+\vspace{0.3cm}
+\textit{Example} : When rolling 2 dice :
+There are  $6^2=36$ outcomes $\Omega =\{(m,n):1\leq m,n \geq 6\}$ . If we state that only '\textit{the sum is 9}' then : $B=\{(6,3),(5,4),(4,5),(3,6)\}$
+\vspace{0.3cm}\\
+\textbf{Additivity}
+\vspace{0.3cm}\\
+ If $A_1, A_2, A_3,...$ are \textbf{disjointed} events, that is \textit{two events cannot happen at the same time} (i.e. $A_i \cap A_j = \empty$ for all $i \neq j$)	then :
+$$P\left( \bigcup_{i=1}^{\infty} A_i \right) = \sum_{i=1}^{\infty} P(A_i)$$\\
+ The addition in \textit{disjoint} means calculates the \textbf{total chance that one or the other} happens.
+ 
+
+
 	\end{minipage}
 	
 	\vspace{1cm}
