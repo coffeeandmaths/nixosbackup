@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{lipsum} % for dummy text; remove when not needed
+\usepackage{parskip} % optional: spacing between paragraphs
+
+\setlength{\columnsep}{1cm} % space between columns
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\today}
+\lhead{Draft notes}
+\cfoot{\thepage}
+
+\titleformat{\section}{\bfseries\large}{}{0em}{}[\titlerule]
+
+\begin{document}
+	
+	\section*{Relations}
+	
+	% Begin Cornell layout
+	\begin{minipage}[t]{0.4\textwidth}
+		%Left side
+		\textbf{Modular Congruence}
+		\vspace{0.3cm}
+		$$a \equiv b \pmod{n} \iff n \mid (a - b)$$
+		 The difference between $a$ and $b$ is divisible by $n$, there exists some integer $k$ such that:$$ a - b = kn$$
+		 \textbf{Alternate Definition}
+		 $$a \equiv b \pmod{n}$$
+		 Interpreted as:  $a$ and $b$ , both leave the \textbf{same remainder} when divided by $n$, that is: $$a \pmod{n} = b \pmod{n}$$
+		 \textbf{To find the Datum(tag)}
+		 $$a \pmod n$$
+		 That is : $$a \pmod n = r$$
+		 Which gives the \textbf{least non-negative} value in this class.
+		 
+		 
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.58\textwidth}
+		%Right side
+		\textbf{Introduction}
+		\vspace{0.3cm}\\
+First, we begin with a set $S$. We propose a relation $\sim$ on S ( on \textbf{itself}), for example 
+$$a\equiv r \pmod{4} \iff a-r \in 4 \mathbf{Z}$$
+We then \textbf{prove} that this is a \textit{equivalent} relation, it must be :
+\begin{itemize}
+	\item \textbf{Reflexive} : $(a,a) \in S$ for all $a \in S$
+	\item \textbf{Symetric} : if $(a,b) \in S$, then $(b,a) \in S$ 
+	\item \textbf{Transitive} : if $(a,b)$,$(b,c)$ $\in S$, then $(a,c) \in S$
+\end{itemize}
+\vspace{0.3cm}
+That confirms that $\sim$ is an \textit{equivalent relation}. For this example to analyze the structure of each element with : $$a \pmod{4}$$
+This value (the **datum**, or **tag**) tells us which other elements $$a$$is related to, and is used to **label** the equivalence class:
+
+$$
+[a] = \{ x \in S \mid x \equiv a \pmod 4 \}
+$$
+We then group all such related elements into \textbf{equivalence classes}. Finally, the set of all these \textit{disjoint classes} forms a \textit{partition} $\mathcal{P}_\sim$ of $S$, which creates a set of the \textit{datum}.
+
+$$\mathcal{P}_\sim = \{[a] \mid a \in S\}$$
+
+The 'union' $\bigcup \mathcal{P}_\sim$ takes the elements to which the partition points and 'union' them obtaining $S$
+$$\bigcup \mathcal{P}_\mid = \bigcup_{a \in S} [a] = S$$
+		
+	\end{minipage}
+	
+	\vspace{1cm}
+	\noindent\textbf{Summary:}
+	\noindent One starts with a \textit{set}. Give the set structure by means of a \textit{relation}. A \textit{datum} (tag) is computed in some fashion based on the relation and stablish which element relates to which so an \textit{equivalent class} is created. Group all datum (tags) in a set called \textit{partition}. If one 'union' the elements that the partition is pointing then the original element is obtained. 
+	
+\end{document}

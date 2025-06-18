@@ -1,0 +1,2794 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+	\subsection*{Preliminaries}
+	This notes are based on the book \textit{Chapter 0, Paolo Aluffi} and use the \textit{naive} set theory, which is a notation system and terminology to express mathematical definition, statements and their proofs. \vspace{0.5cm}
+	\textbf{Some sets and symbols} :
+	\begin{itemize}
+		\item $\emptyset$ : The \textit{empty set } contains no elements:
+		\item  $\mathbb{N}$ the set of \textit{natural numbers}( that is, nonnegative integers);
+		\item  $\mathbb{Z}$ the set of \textit{integers numbers};
+		\item  $\mathbb{Q}$ the set of \textit{rational numbers};
+		\item  $\mathbb{R}$ the set of \textit{real numbers};
+		\item \textit{singelton} refers to any set consisting on \textbf{one} element.
+		\item $\exists$ means \textit{there exists...} (\textit{existencial} quantifier)
+		\item $\forall$ means \textit{foar all...} (\textit{universal} quantifier)
+	\end{itemize}
+	
+	\subsection*{Set}
+	
+	A set is defined solely by its elements. If \( S = \{a, b, c\} \), then:
+	
+	\begin{itemize}
+		\item \( a \in S \), \( b \in S \), \( c \in S \)
+		\item The set is \emph{completely determined} by these elements — their order and repetition are irrelevant
+		\item No other information (e.g., type or label) beyond membership is assumed unless specified
+		\item Two sets are equal if only if they contain the same elements .
+	\end{itemize}
+	 
+	 Often it's better to adopt definitions that express the elements of a larger and already known set $S$ , satisfying some property $P$
+	 
+	 $$A = \{s \in S | satisfies P\}$$
+	 
+	 this means reads \textit{A is equal to the set of all s such that s satisfies P}. This means the elements of $A$ are the values of $s$ that make the statement $P$ come \textit{true}. The stement $P$ is called \textit{elementhood test} for the set.
+	 
+	 
+	\subsection*{What Makes Up a Set? Elements, Powerset, and Structure}
+	
+	\textbf{1. A Set is Defined by Its Elements} \\
+	A set \( S \) is a collection of distinct elements:
+	\[
+	S = \{x_1, x_2, \ldots, x_n\}
+	\]
+	The elements are the only components that \emph{compose} the set.
+	
+	\vspace{1em}
+	\textbf{2. Powerset \( \mathcal{P}(S) \)} \\
+	The powerset of \( S \), denoted \( \mathcal{P}(S) \), is the set of all subsets of \( S \), including the empty set:
+	\[
+	\mathcal{P}(S) = \{ \emptyset, \{x_1\}, \{x_2\}, \ldots, S \}
+	\]
+	\(\mathcal{P}(S)\) is not a subset or element of \( S \); it is a new set constructed from \( S \).
+	
+	\vspace{1em}
+	\textbf{3. The Empty Set \( \emptyset \)} \\
+	The empty set is the unique set with no elements. It is always a subset of any set:
+	\[
+	\emptyset \subseteq S \quad \text{but} \quad \emptyset \in S \text{ only if explicitly included}
+	\]
+	
+	\vspace{1em}
+	\textbf{4. Partitions: Structural, Not Compositional} \\
+	A \emph{partition} of \( S \) is a collection of nonempty, pairwise disjoint subsets (called \emph{blocks}) whose union is all of \( S \):
+	\[
+	P = \{A_1, A_2, \ldots, A_k\} \subseteq \mathcal{P}(S)
+	\quad \text{with } A_i \cap A_j = \emptyset \text{ for } i \neq j,\ 
+	\bigcup_i A_i = S
+	\]
+	The partition is not part of \( S \); it is a structure imposed \emph{on} \( S \), describing how it can be organized.
+	
+	\vspace{1em}
+	\textbf{Conclusion:} \\
+	A set is made of its elements. Its powerset and the empty set relate to it externally (as subsets), and partitions describe how its elements can be structured — but none of these are part of the set unless explicitly included.
+	
+	\subsection*{Mental Model: Sets, Subsets, Powersets, and Partitions}
+	
+	\textbf{Sets as Boxes:} \\
+	A set \( S = \{a, b\} \) can be visualized as a box containing items:
+	\[
+	S = \fbox{\( a \quad b \)}
+	\]
+	Each item is an \emph{element} of \( S \).
+	
+	\vspace{1em}
+	\textbf{Subsets: Boxes Made from Items of \( S \)} \\
+	A subset \( A \subseteq S \) is not literally \emph{inside} \( S \), but rather a new box constructed using only elements from \( S \).
+	
+	\[
+	\text{Example: } \{a\},\ \{b\},\ \{a, b\},\ \emptyset \quad \text{are all subsets of } S
+	\]
+	
+	Importantly, unless specified:
+	\[
+	\{a\} \subseteq S \quad \text{but} \quad \{a\} \notin S
+	\]
+	The subset \( \{a\} \) is not an \emph{element} of \( S \); it's a set built from its elements.
+	
+	\vspace{1em}
+	\textbf{Powerset \( \mathcal{P}(S) \): A Box of Boxes} \\
+	The powerset is the collection of \emph{all possible subsets} of \( S \):
+	\[
+	\mathcal{P}(S) = \{ \emptyset,\ \{a\},\ \{b\},\ \{a, b\} \}
+	\]
+	So \( \mathcal{P}(S) \) is like a "box of boxes" — each inner box is a valid subset made using items from \( S \).
+	
+	\vspace{1em}
+	\textbf{Partitions: Structural Organization of \( S \)} \\
+	A partition is a specific collection of disjoint, nonempty subsets (blocks) that cover all of \( S \). It is not part of \( S \), but rather a structure \emph{on} \( S \):
+	\[
+	P = \{ \{a\}, \{b\} \} \subseteq \mathcal{P}(S)
+	\]
+	Each block is a subset of \( S \), and their union is \( S \). This defines a way to organize or "divide" the elements of \( S \).
+	
+	\vspace{1em}
+	\textbf{Refined Intuition:}
+	\begin{itemize}
+		\item The set \( S \): a box containing elements.
+		\item A subset: a new box built only from elements of \( S \).
+		\item The powerset \( \mathcal{P}(S) \): a box of all possible valid subset-boxes.
+		\item A partition: a special box-of-boxes that divides \( S \) completely and disjointly.
+	\end{itemize}
+	
+	\textit{This refined view avoids mistaking subsets or partitions as literal elements inside \( S \), keeping the abstraction clear.}
+	
+	\subsection*{Refining the Visualization of Sets and Their Structure}
+	
+	\textbf{Set as a Box (Basic Intuition):} \\
+	Think of a set \( S = \{a, b\} \) as a box containing the items \( a \) and \( b \).
+	
+	\vspace{1em}
+	\textbf{Subsets Are Not Smaller Boxes Inside:} \\
+	A subset is not physically "inside" \( S \) like a smaller box nested inside a larger one. \\
+	Instead, a subset is a new box, made only from elements of \( S \).
+	
+	\textit{Example:} \\
+	\( \{a\} \subseteq S \), but \( \{a\} \notin S \) unless we explicitly include \( \{a\} \) as an element.
+	
+	\vspace{1em}
+	\textbf{Refined Mental Model:}
+	
+	\begin{center}
+		\begin{tabular}{|l|l|}
+			\hline
+			\textbf{Concept} & \textbf{Refined Intuition} \\
+			\hline
+			Set \( S \) & A box with items (elements) \\
+			Subset     & Another box, made only with items from \( S \) \\
+			Powerset   & A box of boxes, each box being a subset of \( S \) \\
+			Partition  & A specific box of disjoint, nonempty boxes covering \( S \) \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\vspace{1em}
+	So instead of visualizing subsets as physically inside the set, think of:
+	\begin{itemize}
+		\item Sets as collections governed by rules.
+		\item The powerset as a "factory" that outputs all valid subset-boxes from the original items.
+	\end{itemize}
+	
+	\vspace{1em}
+	\textbf{Why This Distinction Matters:}
+	\begin{itemize}
+		\item Clarifies why \( \{a\} \subseteq S \) but \( \{a\} \notin S \)
+		\item Prevents confusion when dealing with functions, equivalence relations, and partitions
+		\item Helps in understanding more abstract topics like category theory and structural logic
+	\end{itemize}
+	
+	
+	\subsection*{Inclusion of sets}
+	In terms of logic : $S \subseteq T$ means that 
+	$$s \in S \Longrightarrow s \in T$$
+	The \textit{quantifier} $\forall s$(for al $s$) is implicit. \textit{if $s$ is an element of $S$, then $s$ is an element of $T$}; that is all elements of $S$ are elements of $T$. So $S \subseteq t$.
+	
+    \textbf{Note}: for all sets $S$ , $\emptyset \subseteq S$ and $S \subseteq S$. If $S \subseteq T$ and $T \subseteq S$, then $S=T$ 
+    
+    \subsection*{Power Set and Combinatorial Identity first encounter}
+    
+    Let \( S \) be a finite set with \( n = |S| \). The \textbf{power set} \( \mathcal{P}(S) \) is the set of all subsets of \( S \), including:
+    \begin{itemize}
+    	\item the empty set \( \emptyset \),
+    	\item all proper subsets (e.g., \( T \subseteq S \)),
+    	\item and the set \( S \) itself.
+    \end{itemize}
+    
+    The total number of subsets in \( \mathcal{P}(S) \) is given by the combinatorial identity:
+    \[
+    |\mathcal{P}(S)| = \sum_{k=0}^{n} \binom{n}{k} = 2^n
+    \]
+    
+    Each term \( \binom{n}{k} \) counts the number of subsets of size \( k \) within \( S \).
+    
+    \textit{Example}
+    
+    Let \( S = \{a, b, c\} \), so \( n = 3 \). Then:
+    \[
+    \mathcal{P}(S) = \{\emptyset, \{a\}, \{b\}, \{c\}, \{a,b\}, \{a,c\}, \{b,c\}, \{a,b,c\}\}
+    \]
+    Let \( T = \{a, b\} \subseteq S \). Then:
+    \[
+    T \in \mathcal{P}(S), \quad \emptyset \in \mathcal{P}(S), \quad S \in \mathcal{P}(S)
+    \]
+    There are \( \binom{3}{2} = 3 \) subsets of size 2.
+    	
+	\subsection*{Power Sets and the Combinatorial Identity \( |\mathcal{P}(S)| = 2^{|S|} \)}
+	
+	Let \( S \) be a finite set with \( n \) elements. The \emph{power set} \( \mathcal{P}(S) \) is the set of all subsets of \( S \), including the empty set and \( S \) itself.
+	
+	\textbf{Combinatorial Identity:}
+	\[
+	|\mathcal{P}(S)| = 2^{|S|}
+	\]
+	
+	\textbf{Explanation:}  
+	Each element of \( S \) has exactly two options when forming a subset:
+	\begin{itemize}
+		\item include the element,
+		\item or exclude it.
+	\end{itemize}
+	
+	For \( n \) elements, the total number of possible combinations is:
+	\[
+	2 \times 2 \times \cdots \times 2 = 2^n \quad \text{(n times)}
+	\]
+	
+	Hence, the number of subsets — which form the elements of the power set — is \( 2^n \).
+	
+	\textbf{Example:}  
+	Let \( S = \{a, b, c\} \). Then \( |S| = 3 \), and:
+	\[
+	|\mathcal{P}(S)| = 2^3 = 8
+	\]
+	
+	The 8 subsets of \( S \) are:
+	\[
+	\mathcal{P}(S) = \{\emptyset, \{a\}, \{b\}, \{c\}, \{a,b\}, \{a,c\}, \{b,c\}, \{a,b,c\} \}
+	\]
+	
+	\textbf{Categorization by Size:}
+	\begin{itemize}
+		\item 0-element subsets: \( \binom{3}{0} = 1 \) → \( \emptyset \)
+		\item 1-element subsets: \( \binom{3}{1} = 3 \) → \( \{a\}, \{b\}, \{c\} \)
+		\item 2-element subsets: \( \binom{3}{2} = 3 \) → \( \{a,b\}, \{a,c\}, \{b,c\} \)
+		\item 3-element subset: \( \binom{3}{3} = 1 \) → \( \{a,b,c\} \)
+	\end{itemize}
+	
+	\textbf{Hence:}
+	\[
+	\sum_{k=0}^n \binom{n}{k} = 2^n
+	\]
+	
+	This confirms that the number of subsets (i.e., the cardinality of the power set) grows exponentially with the number of elements in \( S \), and the binomial coefficients count subsets of fixed size.
+	
+	
+	
+	\subsection*{Why Every Set Has the Empty Set as a Subset}
+	
+	\textbf{Claim:} For any set \( S \), the empty set \( \emptyset \) is a subset of \( S \), i.e., \( \emptyset \subseteq S \).
+	
+	\textbf{Definition:}  
+	A subset \( A \subseteq B \) means:  
+	\[
+	\forall x \in A,\ x \in B
+	\]
+	
+	\textbf{Now:}  
+	Since \( \emptyset \) has no elements, the statement “\( x \in \emptyset \Rightarrow x \in S \)” is vacuously true — there are no elements \( x \) to contradict the condition.
+	
+	Therefore:
+	\[
+	\emptyset \subseteq S \quad \text{for all sets } S
+	\]
+	
+	\textbf{Why is this necessary?}  
+	Subsets represent combinations of elements from \( S \). The empty set corresponds to choosing no elements. Excluding \( \emptyset \) from \( \mathcal{P}(S) \) would violate the combinatorial identity:
+	\[
+	|\mathcal{P}(S)| = 2^{|S|}
+	\]
+	
+	\textbf{Counterexample (Conceptual):}  
+	Suppose we define a power set \( \mathcal{P}(S) \) that omits \( \emptyset \).  
+	Let \( S = \{a\} \). Then:
+	\begin{itemize}
+		\item Correct \( \mathcal{P}(S) = \{\emptyset, \{a\} \} \)
+		\item Incorrect \( \mathcal{P}(S) = \{\{a\}\} \) would imply only one subset
+	\end{itemize}
+	
+	This contradicts \( 2^{|S|} = 2^1 = 2 \), hence the omission of \( \emptyset \) breaks the mathematical definition of subset and power set.
+	
+	\textbf{Summary:}  
+	The empty set \( \emptyset \) is always a subset of every set because it satisfies the definition of subset vacuously and ensures combinatorial and logical consistency.
+	
+	\subsection*{Partitions and Power Set (Structure and Size)}
+	
+	Let $S$ be a finite set with $|S| = n$. The \textbf{power set} $\mathcal{P}(S)$ contains all $2^n$ subsets of $S$, including $\emptyset$ and $S$ itself. A \textbf{partition} of $S$ is a set of non-empty, disjoint subsets whose union is $S$.
+	
+	A partition is not simply a subset of $\mathcal{P}(S)$, but a \emph{special} subset:
+	\[
+	P \subset \mathcal{P}(S) \setminus \{\emptyset\}, \quad \bigcup_{A \in P} A = S, \quad A_i \cap A_j = \emptyset \text{ for } i \ne j
+	\]
+	
+	\paragraph{General Identity (Combinatorial)}
+	For any partition $P = \{A_1, \ldots, A_k\}$ of $S$:
+	\[
+	|S| = \sum_{i=1}^{k} |A_i|
+	\]
+	This reflects the disjoint union structure of partitions.
+	
+	\subsubsection*{Example: $|S| = 2$}
+	Let $S = \{a, b\}$.
+	Possible partitions:
+	\begin{itemize}
+		\item $\{\{a\}, \{b\}\}$
+		\item $\{\{a,b\}\}$
+	\end{itemize}
+	
+	\subsubsection*{Example: $|S| = 7$}
+	Let $S = \{1,2,3,4,5,6,7\}$. Sample partitions:
+	\begin{itemize}
+		\item $\{\{1,2,3\}, \{4,5\}, \{6,7\}\}$ \hfill (class sizes: 3, 2, 2)
+		\item $\{\{1,2,3,4\}, \{5,6,7\}\}$ \hfill (class sizes: 4, 3)
+		\item $\{\{1,2\}, \{3,4\}, \{5,6\}, \{7\}\}$ \hfill (class sizes: 2, 2, 2, 1)
+	\end{itemize}
+	
+	\textbf{Observation:} When $|S|$ is odd (e.g., $n = 7$), there is no partition where all classes are the same size unless singleton classes are allowed. Symmetric partitions are only possible when $n$ is divisible by the class size.
+	
+	\subsection*{Mathematical Significance of Partition Size}
+	
+	The size of a partition (number of blocks) has diverse implications:
+	
+	\begin{itemize}
+		\item \textbf{Combinatorics:} Partition size determines how a set is grouped. The number of such partitions is given by the \emph{Bell numbers}; the number into exactly $k$ parts is given by \emph{Stirling numbers of the second kind}.
+		\item \textbf{Equivalence Relations:} Each equivalence relation on $S$ corresponds to a partition; the number of classes equals the number of blocks.
+		\item \textbf{Algebra and Number Theory:} Cosets, cycle decompositions, and integer partitions rely on partition sizes. Symmetric group actions often classify elements via orbit partitions.
+		\item \textbf{Probability:} In stochastic processes or Bayesian models, partition size corresponds to the number of clusters (e.g., in the Chinese restaurant process).
+		\item \textbf{Category Theory:} The number of classes in $S/\!\sim$ determines the objects in the quotient structure or categorical fiber.
+	\end{itemize}
+	
+	\subsection*{Relation Composition and Function Analogy}
+	
+	\textbf{Definition.}  
+	Let $R \subseteq A \times B$ and $S \subseteq B \times C$ be two relations.  
+	The \emph{composition} of $S$ and $R$, denoted by $S \circ R$, is defined as:
+	\[
+	S \circ R = \{ (a, c) \in A \times C \mid \exists b \in B \text{ such that } (a, b) \in R \text{ and } (b, c) \in S \}
+	\]
+	
+	\textbf{Key Point:} Relation composition is performed \emph{right to left}, just like function composition.
+	
+	\[
+	(S \circ R)(a) = S(R(a)) \quad \text{(first apply $R$, then $S$)}
+	\]
+	
+	\textbf{Function Analogy.}  
+	Given functions $f: B \to C$ and $g: A \to B$, their composition is:
+	\[
+	f \circ g : A \to C \quad \text{with} \quad (f \circ g)(a) = f(g(a))
+	\]
+	Similarly, for relations $R: A \to B$ and $S: B \to C$:
+	\[
+	S \circ R : A \to C \quad \text{with} \quad (a, c) \in S \circ R \iff \exists b \in B \text{ such that } (a, b) \in R \text{ and } (b, c) \in S
+	\]
+	
+	\textbf{Example 1.}  
+	Let $A = \{1\}$, $B = \{2\}$, $C = \{3\}$,  
+	and define:
+	\[
+	R = \{(1, 2)\}, \quad S = \{(2, 3)\}
+	\]
+	Then:
+	\[
+	S \circ R = \{(1, 3)\}
+	\]
+	Explanation: $1 \xrightarrow{R} 2 \xrightarrow{S} 3$
+	
+	\textbf{Example 2.}  
+	Let $R = \{(a, b), (c, b)\}$ and $S = \{(b, d), (b, e)\}$
+	
+	Then:
+	\[
+	S \circ R = \{(a, d), (a, e), (c, d), (c, e)\}
+	\]
+	Explanation: Both $a$ and $c$ map to $b$ via $R$, and $b$ maps to both $d$ and $e$ via $S$.
+	
+	\textbf{Conclusion:}  
+	- Composition of relations is a binary operation on relations.  
+	- It is associative: $(T \circ S) \circ R = T \circ (S \circ R)$  
+	- Evaluation order is always \emph{right to left}, just like with functions.
+	
+	\subsection*{Relation Composition: Inducing a Relation on a Set via Shared Connections}
+	
+	\textbf{General Construction:}
+	
+	Let $R \subseteq A \times B$ be a binary relation.  
+	Define the composition:
+	\[
+	R^{-1} \circ R = \{ (a_1, a_2) \in A \times A \mid \exists b \in B \text{ such that } (a_1, b) \in R \text{ and } (a_2, b) \in R \}
+	\]
+	
+	This is a \textbf{new relation on $A$} — it relates two elements of $A$ whenever they are connected to the same element in $B$ through $R$.
+	
+	\vspace{1em}
+	
+	\textbf{Interpretation:}
+	\begin{itemize}
+		\item Think of $R$ as connecting elements of $A$ to elements of $B$
+		\item Then $R^{-1} \circ R$ connects elements of $A$ to each other, via shared $B$-values
+		\item This defines a kind of "shared property" or "common link" relation
+	\end{itemize}
+	
+	\vspace{1em}
+	
+	\textbf{Real-World Example: Students and Courses}
+	
+	Let:
+	\begin{itemize}
+		\item $S$ = set of students
+		\item $C$ = set of courses
+		\item $E \subseteq S \times C$, where $(s, c) \in E$ means student $s$ is enrolled in course $c$
+	\end{itemize}
+	
+	Then:
+	\[
+	E^{-1} \circ E = \{ (s, t) \in S \times S \mid \exists c \in C \text{ such that } (s, c) \in E \text{ and } (t, c) \in E \}
+	\]
+	
+	\textbf{Meaning:}  
+	Students $s$ and $t$ are related if they are both enrolled in the same course.
+	
+	\vspace{1em}
+	
+	\textbf{Key Properties of $R^{-1} \circ R$:}
+	\begin{itemize}
+		\item Always a subset of $A \times A$ (a relation on $A$)
+		\item Reflexive: each $a \in A$ is related to itself via any $(a, b) \in R$
+		\item Symmetric: if $(a_1, a_2) \in R^{-1} \circ R$, then $(a_2, a_1)$ also holds
+		\item Not necessarily transitive (unless $R$ satisfies special conditions)
+	\end{itemize}
+	
+	\vspace{1em}
+	
+	
+		Composing a relation with its inverse, $R^{-1} \circ R$, builds a relation on the domain of $R$ that captures \emph{shared connections} via a middle set.
+		
+		This pattern is widely used to define similarity, co-membership, or induced relations in set theory, graph theory, databases, and logic.
+	
+	
+	\subsection*{Example: Composition of Relations — Students, Courses, Professors}
+	
+	Let:
+	\begin{itemize}
+		\item $S$ be the set of students
+		\item $C$ be the set of courses
+		\item $P$ be the set of professors
+		\item $E \subseteq S \times C$, where $(s, c) \in E$ means student $s$ is enrolled in course $c$
+		\item $T \subseteq C \times P$, where $(c, p) \in T$ means course $c$ is taught by professor $p$
+	\end{itemize}
+	
+	\textbf{Composition of Relations:}
+	\[
+	T \circ E = \{ (s, p) \in S \times P \mid \exists c \in C \text{ such that } (s, c) \in E \text{ and } (c, p) \in T \}
+	\]
+	
+	\textbf{Interpretation:}
+	\begin{itemize}
+		\item The relation $T \circ E$ connects a student $s$ to a professor $p$
+		\item This connection exists if there is a course $c$ such that:
+		\begin{itemize}
+			\item $s$ is enrolled in $c$ (i.e., $(s, c) \in E$)
+			\item $p$ teaches $c$ (i.e., $(c, p) \in T$)
+		\end{itemize}
+	\end{itemize}
+	
+	\textbf{Reading the Condition:}
+	\[
+	\exists c \in C \; ((s, c) \in E \text{ and } (c, p) \in T)
+	\]
+	This means:
+	\emph{"There exists a course $c$ such that student $s$ is enrolled in $c$ and professor $p$ teaches $c$."}
+	
+	\textbf{Conclusion:}
+	The composition $T \circ E$ describes the relation:
+	\[
+	\text{“Student $s$ is taught by professor $p$ via some shared course $c$.”}
+	\]
+	
+	\vspace{1em}
+  \subsection*{Interpretetion ( notation)}
+		To interpret a composition like $T \circ E$, follow these steps:
+		\begin{enumerate}
+			\item Identify all sets involved and their meanings
+			\item Understand the domain and codomain of each relation
+			\item Trace the quantified variable (typically the "middle set")
+			\item Interpret the outer pair $(a, c)$: it's included only if there's a connecting path via some $b$
+		\end{enumerate}
+		\textbf{Tip:} Don't treat the expression as a symbolic equation — treat it as a logical condition for inclusion.
+	\subsection*{Quantified Variable in Relation Composition}
+	
+	In a composition of relations such as:
+	\[
+	T \circ E = \{ (s, p) \in S \times P \mid \exists c \in C \; ((s, c) \in E \wedge (c, p) \in T) \}
+	\]
+	
+	the \textbf{quantified variable} is the variable that is bound by the quantifier, in this case:
+	
+	\[
+	\exists c \in C
+	\]
+	
+	This variable $c$ is:
+	\begin{itemize}
+		\item The element from the \emph{intermediate set} $C$
+		\item Not part of the output pair $(s, p)$
+		\item Required to exist in order for $(s, p)$ to be included in the composition
+	\end{itemize}
+	
+	\textbf{General Rule:}  
+	In a composition $Q \circ P$, the quantified variable always comes from the shared middle set, and it is what "glues" the two relations together:
+	\[
+	Q \circ P = \{ (a, c) \mid \exists b \in B \text{ such that } (a, b) \in P \text{ and } (b, c) \in Q \}
+	\]
+	Here, the quantified variable is $b \in B$.
+	
+	
+	
+	\subsection*{Equivalence Classes and Blocks of a Partition}
+	
+	Let $\sim$ be an equivalence relation on a set $S$.
+	
+	\begin{itemize}
+		\item For each $a \in S$, the \textbf{equivalence class} of $a$ is defined as:
+		\[
+		[a]_\sim := \{ b \in S \mid b \sim a \}
+		\]
+		\item The set of all distinct equivalence classes forms a \textbf{partition} of $S$:
+		\[
+		P := \{ [a]_\sim \mid a \in S \}
+		\]
+		where only distinct classes are retained (i.e., $[a]_\sim = [b]_\sim \Rightarrow$ counted once).
+		
+		\item In this context, each $[a]_\sim$ is called a \textbf{block} or \textbf{part} of the partition $P$.
+		
+		\item Conversely, given a partition $P = \{A_i\}_{i \in I}$ of $S$, we can define a relation:
+		\[
+		a \sim b \iff \exists A \in P \text{ such that } a \in A \wedge b \in A
+		\]
+		This relation is reflexive, symmetric, and transitive — i.e., an equivalence relation whose equivalence classes are precisely the blocks $A \in P$.
+	\end{itemize}
+	
+	\section*{Relations on a Set (Based on Aluffi, Ch.0, §1.3)}
+	
+	\subsection*{What is a Relation?}
+	Let $S$ be a set. A \textbf{relation} $R$ on $S$ is formally defined as a subset of the Cartesian product $S \times S$:
+	\[
+	R \subseteq S \times S.
+	\]
+	Each element of $R$ is an ordered pair $(a, b)$ where $a, b \in S$. If $(a,b) \in R$, we write $a \sim b$ or $a \, R \, b$ and say \textit{$a$ is related to $b$}.
+	
+	\vspace{1em}
+	\textbf{Mental model:} Think of $S$ as a list of objects and $R$ as a set of arrows connecting them. A relation is the collection of all arrows indicating how elements in $S$ are "connected".
+	
+	\subsection*{Properties of Relations}
+	A relation $R$ on a set $S$ may have one or more of the following properties:
+	\begin{itemize}
+		\item \textbf{Reflexive:} $(a,a) \in R$ for all $a \in S$.
+		\item \textbf{Symmetric:} If $(a,b) \in R$, then $(b,a) \in R$.
+		\item \textbf{Transitive:} If $(a,b) \in R$ and $(b,c) \in R$, then $(a,c) \in R$.
+	\end{itemize}
+	
+	If a relation satisfies all three, it is called an \textbf{equivalence relation}.
+	
+	\vspace{0.5em}
+	\hrule
+	\vspace{0.5em}
+	
+	\subsection*{Example 1: Equality on $\mathbb{Z}$}
+	
+	Let $S = \mathbb{Z}$ and define a relation $R$ by:
+	\[
+	a \sim b \iff a = b.
+	\]
+	This is the simplest and most intuitive relation.
+	
+	\paragraph{Reflexivity:} For all $a \in \mathbb{Z}$, clearly $a = a$ $\Rightarrow$ $(a,a) \in R$.
+	
+	\paragraph{Symmetry:} If $a = b$, then $b = a$ $\Rightarrow$ $(b,a) \in R$.
+	
+	\paragraph{Transitivity:} If $a = b$ and $b = c$, then $a = c$ $\Rightarrow$ $(a,c) \in R$.
+	
+	\textbf{Conclusion:} The equality relation is reflexive, symmetric, and transitive. Thus, it is an equivalence relation.
+	
+	\vspace{0.5em}
+	\hrule
+	\vspace{0.5em}
+	
+	\subsection*{Example 2: Congruence Modulo $n$ on $\mathbb{Z}$ (Aluffi, p.6)}
+	
+	Let $n \in \mathbb{N}$, and define:
+	\[
+	a \sim b \iff a \equiv b \pmod{n} \iff n \mid (a - b).
+	\]
+	That is, $a$ and $b$ leave the same remainder when divided by $n$.
+	
+	\paragraph{Reflexivity:} For all $a \in \mathbb{Z}$, $a - a = 0$, and $n \mid 0$ for any $n$. Thus, $(a,a) \in R$.
+	
+	\paragraph{Symmetry:} Suppose $a \equiv b \pmod{n} \Rightarrow n \mid (a - b)$. Then, $b - a = -(a - b)$ and since divisibility is closed under negation, $n \mid (b - a)$ $\Rightarrow$ $b \equiv a \pmod{n}$.
+	
+	\paragraph{Transitivity:} Suppose $a \equiv b \pmod{n}$ and $b \equiv c \pmod{n}$. Then:
+	\[
+	n \mid (a - b),\quad n \mid (b - c) \Rightarrow n \mid (a - b + b - c) = (a - c) \Rightarrow a \equiv c \pmod{n}.
+	\]
+	
+	\textbf{Conclusion:} The modulo relation is reflexive, symmetric, and transitive. Therefore, congruence modulo $n$ is an equivalence relation.
+	
+	\subsection*{Geometric Interpretation (Aluffi, p.7)}
+	Every equivalence relation partitions a set $S$ into \textbf{equivalence classes}:
+	\[
+	[a] := \{ b \in S \mid a \sim b \}.
+	\]
+	The set of all such classes is denoted $S/{\sim}$, and:
+	\[
+	S = \bigcup_{[a] \in S/{\sim}} [a], \quad [a] \cap [b] = \emptyset \text{ or } [a] = [b].
+	\]
+	
+	\textbf{For example, modulo 3 on $\mathbb{Z}$:}
+	\[
+	\mathbb{Z}/{\sim} = \{ [0], [1], [2] \}, \text{ where } [0] = \{ \ldots, -6, -3, 0, 3, 6, \ldots \}.
+	\]
+	
+	\vspace{0.5em}
+	\hrule
+	\vspace{0.5em}
+	
+	\subsection*{Meaning of Reflexivity, Symmetry, Transitivity (Mental Notes)}
+	
+	\begin{itemize}
+		\item \textbf{Reflexivity:} Every element relates to itself.  
+		\textit{Mental image: self-loop on each node in a graph.}
+		
+		\item \textbf{Symmetry:} If $a$ relates to $b$, then $b$ relates to $a$.  
+		\textit{Mental image: undirected edge between nodes.}
+		
+		\item \textbf{Transitivity:} If $a$ relates to $b$ and $b$ to $c$, then $a$ relates to $c$.  
+		\textit{Mental image: if you can travel from $a$ to $c$ through $b$, there is a shortcut arrow from $a$ to $c$.}
+	\end{itemize}
+	
+	\textbf{Summary:} An equivalence relation “groups” elements that behave identically under some criterion — such as equality or congruence modulo $n$ — and forms a natural partition of the set into disjoint subsets (equivalence classes).
+	
+	
+	
+	\subsection*{Recap: Partition Size vs Set Size – Combinatorial Identity}
+	
+	Let $S = \{1, 2, 3, 4, 5, 6\}$, so $|S| = 6$.
+	
+	Suppose $S$ is partitioned as:
+	\[
+	P = \{\{1,4\}, \{2,5\}, \{3,6\}\}
+	\]
+	Then $P$ contains 3 disjoint blocks (or parts), each of size 2.
+	
+	\paragraph{Combinatorial Identity:}
+	\[
+	|S| = \sum_{A \in P} |A| = 2 + 2 + 2 = 6
+	\]
+	
+	\paragraph{Important Distinction:}
+	\begin{itemize}
+		\item $|S| = 6$ refers to the total number of elements in the set $S$.
+		\item $|P| = 3$ refers to the number of blocks (equivalence classes) in the partition.
+		\item The identity sums the \emph{sizes of the blocks}, not the number of blocks.
+	\end{itemize}
+	
+	\paragraph{Note on Equivalence Classes:}
+	Each element $a \in S$ belongs to exactly one block $[a]_\sim$.
+	Though some equivalence classes coincide (e.g. $[1] = [4]$), all six elements of $S$ are represented exactly once in the sum.
+	
+	\[
+	\Rightarrow \text{The repetition of class labels does not change the total count of elements.}
+	\]
+	
+	\subsection*{Combinatorial Identity Recap}
+	
+	When we say:
+	\[
+	|S| = \sum_{i=1}^{k} |A_i|
+	\]
+	we are summing the \textbf{sizes of the subsets} (the blocks of the partition), \emph{not} counting the number of blocks themselves.
+	
+	\paragraph{Example:}
+	Let:
+	\[
+	P = \{\{1,4\}, \{2,5\}, \{3,6\}\}
+	\]
+	Then:
+	\[
+	|A_1| = 2, \quad |A_2| = 2, \quad |A_3| = 2
+	\]
+	So the total is:
+	\[
+	|S| = |A_1| + |A_2| + |A_3| = 2 + 2 + 2 = 6
+	\]
+	This recovers the size of the set $S$.
+	
+	\paragraph{Why not just 3?}
+	
+	\begin{itemize}
+		\item The number of blocks is 3
+		\item But the identity tracks the \emph{total number of elements in $S$}, which is 6
+	\end{itemize}
+	
+	\paragraph{Summary Table:}
+	
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Concept} & \textbf{Value} \\
+		\hline
+		Number of elements in $S$ & 6 \\
+		Number of blocks in partition $P$ & 3 \\
+		Sizes of blocks & 2, 2, 2 \\
+		Combinatorial sum & $2 + 2 + 2 = 6$ \\
+		\hline
+	\end{tabular}
+	
+	\paragraph{Note on Repetition:}
+	When writing equivalence classes:
+	\begin{itemize}
+		\item Every element of $S$ appears in some $[a]$
+		\item Many classes are equal: e.g., $[1] = [4]$, $[2] = [5]$
+	\end{itemize}
+	But the set $S$ still contains 6 distinct elements — each counted exactly once.
+	
+	\paragraph{Intuition:}
+	Think of 3 labeled boxes, each holding 2 balls.  
+	The number of boxes is 3, but the total number of balls is 6 — and that’s what the identity measures.
+	
+	
+	\section*{Basic Subset Properties and Their Role in Set Theory}
+	
+	Let \( S, T \) be sets.
+	
+	\begin{enumerate}
+		\item \( \emptyset \subseteq S \) \hfill (for all sets \( S \))
+		\item \( S \subseteq S \) \hfill (every set is a subset of itself)
+		\item If \( S \subseteq T \) and \( T \subseteq S \), then \( S = T \)
+	\end{enumerate}
+	
+	\subsection*{Plain Language Explanation}
+	
+	\begin{itemize}
+		\item Every set contains the empty set as a subset, because there are no elements in \( \emptyset \) to contradict membership.
+		\item A set is always a subset of itself — this follows vacuously from the definition of subset.
+		\item If each set is a subset of the other, then they must contain exactly the same elements — hence, they are equal.
+	\end{itemize}
+	
+	\subsection*{Is This Redundant?}
+	
+	Not quite. While these facts may seem obvious, they are foundational truths in set theory and serve as starting points for more complex reasoning.
+	
+	\begin{itemize}
+		\item The fact that \( \emptyset \subseteq S \) is vacuously true stems directly from the definition:  
+		\( A \subseteq B \iff \forall x \in A,\ x \in B \). Since \( \emptyset \) has no elements, this condition is always satisfied.
+		
+		\item The rule that mutual inclusion implies equality ensures that the notion of ``subset'' is logically well-defined. It's also how we define equality of sets.
+	\end{itemize}
+	
+	\subsection*{Formal Proof of Set Equality from Mutual Inclusion}
+	
+	\textbf{Claim:} If \( S \subseteq T \) and \( T \subseteq S \), then \( S = T \).
+	
+	\textbf{Definition of Subset:}  
+	\[
+	A \subseteq B \iff \forall x \in A,\ x \in B
+	\]
+	
+	\textbf{Proof:}  
+	Assume:
+	\begin{align*}
+		S \subseteq T &\Rightarrow \forall x \in S,\ x \in T \tag{1} \\
+		T \subseteq S &\Rightarrow \forall x \in T,\ x \in S \tag{2}
+	\end{align*}
+	
+	Now let \( x \in S \). By (1), \( x \in T \).  
+	Let \( x \in T \). By (2), \( x \in S \).  
+	Therefore,
+	\[
+	\forall x,\ x \in S \iff x \in T
+	\Rightarrow S = T \quad \text{(by extensionality of sets)}
+	\]
+
+	
+	\subsection*{Why Mention \( \emptyset \subseteq S \)?}
+	
+	\begin{itemize}
+		\item \textbf{Vacuous truth:}  
+		As stated above, \( \emptyset \subseteq S \) is always true because no counterexample can exist.
+		
+		\item \textbf{Logical grounding:}  
+		It confirms that the logic of subsets works correctly even for boundary cases like the empty set.
+		
+		\item \textbf{Completeness:}  
+		Mentioning the empty set helps define the subset relation from the ground up, forming a minimal base case.
+	\end{itemize}
+	
+	\textbf{Summary:}  
+	The statement \( \emptyset \subseteq S \) isn’t mentioned for excitement, but because it is the most basic instance of subset logic. It ensures your reasoning begins with a complete and precise understanding of what ``subset'' really means.
+	
+	\subsection*{Clarifying Sets, the Empty Set, and Powersets}
+	
+	\textbf{Definition of a Set:} A set is a collection of distinct elements. If \( S = \{a, b\} \), then the elements of \( S \) are \( a \) and \( b \).
+	
+	\textbf{The Empty Set:} The empty set \( \emptyset \) is the unique set with no elements. It is a subset of every set:
+	\[
+	\emptyset \subseteq S \quad \text{for any set } S
+	\]
+	but it is not an element of \( S \) unless explicitly included:
+	\[
+	\emptyset \in S \quad \text{only if } \emptyset \text{ is one of the elements of } S
+	\]
+	
+	\textbf{Powerset:} The powerset of a set \( S \), denoted \( \mathcal{P}(S) \), is the set of all subsets of \( S \). It always includes the empty set:
+	\[
+	\mathcal{P}(S) = \{ \emptyset, \{a\}, \{b\}, \{a, b\} \} \quad \text{if } S = \{a, b\}
+	\]
+	
+	\textbf{Important Distinction:}
+	\begin{itemize}
+		\item \( \mathcal{P}(S) \neq S \): they are different sets.
+		\item \( \emptyset \in \mathcal{P}(S) \), but \( \emptyset \notin S \) unless explicitly stated.
+		\item A set is not "composed of the empty set and its powerset." Instead, the powerset is a new set derived from \( S \), and it includes \( \emptyset \) as one of its elements.
+	\end{itemize}
+	
+	
+	\subsection*{Disjoint Union (Tagged Union)}
+	
+	In set theory, the \emph{disjoint union} (also called the \emph{tagged union}) of two sets \( A \) and \( B \) is a way of combining them into a new set while preserving information about which set each element originally came from.
+	
+	This is necessary because if \( A \cap B \neq \emptyset \), a simple union \( A \cup B \) does not distinguish elements with the same identity in both sets.
+	
+	\textbf{Definition:}
+	
+	The disjoint union of \( A \) and \( B \) is defined as:
+	\[
+	A \sqcup B := (\{0\} \times A) \cup (\{1\} \times B)
+	\]
+	
+	This construction uses tags (0 and 1) to indicate the origin of each element.
+	
+	\begin{itemize}
+		\item Each element of \( A \) is paired with 0: \( (0, a) \)
+		\item Each element of \( B \) is paired with 1: \( (1, b) \)
+	\end{itemize}
+	
+	This guarantees disjointness even if \( A = B \).
+	
+	\textbf{Example:}
+	
+	Let \( A = \{x, y\} \), \( B = \{y, z\} \). Then:
+	\[
+	A \sqcup B = \{(0, x), (0, y), (1, y), (1, z)\}
+	\]
+	
+	Here, \( y \) appears in both sets, but the tags distinguish its source.
+	
+	
+	\subsection*{Cartesian Product and Relations (Aluffi, Ch.1)}
+	
+	\textbf{Cartesian Product:}
+	
+	Given two sets \( A \) and \( B \), their \emph{Cartesian product} is defined as:
+	\[
+	A \times B := \{ (a, b) \mid a \in A, \, b \in B \}
+	\]
+	It is the set of all ordered pairs with the first element from \( A \) and the second from \( B \).
+	
+	\medskip
+	
+	\textbf{Relation:}
+	
+	A \emph{relation} \( R \) from a set \( A \) to a set \( B \) is defined as a subset of the Cartesian product:
+	\[
+	R \subseteq A \times B
+	\]
+	We say that \( a \in A \) is \emph{related to} \( b \in B \) (written \( a \, R \, b \)) if \( (a, b) \in R \).
+	
+	\medskip
+	
+	\textbf{Domain and Range:}
+	
+	If \( R \subseteq A \times B \), then:
+	\begin{align*}
+		\text{Domain of } R &: \operatorname{Dom}(R) := \{ a \in A \mid \exists b \in B,\, (a,b) \in R \} \\
+		\text{Range of } R &: \operatorname{Ran}(R) := \{ b \in B \mid \exists a \in A,\, (a,b) \in R \}
+	\end{align*}
+	
+	\medskip
+	
+	\textbf{Prototype of a Well-Behaved Relation:}
+	
+	From Aluffi, p.7 — the “prototype” for a well-behaved relation is one where:
+	\begin{enumerate}
+		\item Every element \( a \in A \) is related to \emph{at most one} element \( b \in B \).
+		\item Every element \( a \in A \) is related to \emph{at least one} element \( b \in B \).
+	\end{enumerate}
+	
+	Combining both: each \( a \in A \) is related to \textbf{exactly one} \( b \in B \). This special kind of relation is a \textbf{function}.
+	
+	\medskip
+	
+	\textbf{Relation Graph (Graph of a Relation):}
+	
+	The \emph{graph of a relation} \( R \subseteq A \times B \) is simply the set of ordered pairs \( (a,b) \in R \). It can be thought of as:
+	\[
+	\Gamma_R := \{ (a, b) \in A \times B \mid a \text{ is related to } b \}
+	\]
+	
+	In particular, the graph of a function \( f: A \to B \) is:
+	\[
+	\Gamma_f := \{ (a, f(a)) \mid a \in A \} \subseteq A \times B
+	\]
+	
+	This graph completely determines the function: knowing all the pairs \( (a, f(a)) \) is equivalent to knowing \( f \) itself.
+	
+	\subsection*{Datum, Partition, and Equivalence Class (Aluffi, p.7)}
+	
+	\begin{center}
+		\renewcommand{\arraystretch}{1.6}
+		\begin{tabular}{|p{3.5cm}|p{11cm}|}
+			\hline
+			\textbf{Concept} & \textbf{Explanation} \\
+			\hline
+			
+			\textbf{Datum} & A \emph{datum} is a basic piece of information — in this context, an element of a set \( S \) that is to be classified or grouped. Each datum belongs to one and only one subset in the partition. \\
+			
+			\hline
+			
+			\textbf{Partition} & A \emph{partition} \( \mathcal{P} \) of a set \( S \) is a collection of nonempty, pairwise disjoint subsets \( \{S_i\} \) such that:
+			\[
+			\bigcup_{S_i \in \mathcal{P}} S_i = S
+			\quad \text{and} \quad S_i \cap S_j = \emptyset \text{ for } i \neq j.
+			\]
+			Each element (datum) of \( S \) belongs to exactly one subset. These subsets \( S_i \in \mathcal{P} \) are called \emph{blocks} of the partition. \\
+			
+			\hline
+			
+			\textbf{Equivalence Class} & An \emph{equivalence class} under an equivalence relation \( \sim \) on \( S \) is a subset
+			\[
+			[a]_\sim := \{ x \in S \mid x \sim a \}.
+			\]
+			It consists of all elements related to \( a \). The set of all equivalence classes forms a partition \( \mathcal{P}_\sim \) of \( S \). \\
+			
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\bigskip
+	
+	\textbf{Illustrative Example:}
+	
+	Let \( S = \{0, 1, 2, 3, 4, 5\} \), and define the equivalence relation \( a \sim b \iff a \equiv b \pmod{3} \).
+	
+	\begin{itemize}
+		\item \textbf{Equivalence classes:}
+		\begin{align*}
+			[0]_\sim &= \{0, 3\}, \\
+			[1]_\sim &= \{1, 4\}, \\
+			[2]_\sim &= \{2, 5\}.
+		\end{align*}
+		
+		\item \textbf{Partition } \( \mathcal{P}_\sim \) \textbf{ of } \( S \): 
+		\[
+		\mathcal{P}_\sim = \{ \{0, 3\}, \{1, 4\}, \{2, 5\} \}
+		\quad \text{such that} \quad \bigcup \mathcal{P}_\sim = S.
+		\]
+		
+		\item Each element (datum) belongs to exactly one equivalence class (one block of the partition).
+	\end{itemize}
+	
+	\section*{What is an Isomorphism?}
+	
+	An \textbf{isomorphism} is a structure-preserving, invertible map between two mathematical objects. It tells us that the two objects are essentially the same in terms of their structure, even if they appear different.
+	
+	\subsection*{General Definition}
+	
+	Let \( f : A \to B \). Then \( f \) is an isomorphism if:
+	
+	\begin{itemize}
+		\item \( f \) is bijective (one-to-one and onto), and
+		\item both \( f \) and \( f^{-1} \) preserve structure.
+	\end{itemize}
+	
+	The specific structure depends on the context: sets, groups, rings, etc.
+	
+	\subsection*{In Set Theory}
+	
+	An isomorphism between sets is simply a bijection.
+	
+	\textbf{Example:}  
+	Let \( A = \{1, 2, 3\} \), and \( B = \{a, b, c\} \).  
+	Define \( f : A \to B \) by:
+	\[
+	f(1) = a, \quad f(2) = b, \quad f(3) = c
+	\]
+	Then \( f \) is a set isomorphism — it preserves the number of elements (cardinality), but not structure in a deeper sense (since sets have no structure beyond membership).
+	
+	\subsection*{In Group Theory (Structure Matters)}
+	
+	Let:
+	\[
+	G = (\mathbb{Z}_4, +), \quad H = (\{1, i, -1, -i\}, \cdot)
+	\]
+	These are the integers modulo 4 under addition and the 4th roots of unity in \( \mathbb{C} \) under multiplication.
+	
+	Define \( f : \mathbb{Z}_4 \to H \) by:
+	\[
+	f(0) = 1, \quad f(1) = i, \quad f(2) = -1, \quad f(3) = -i
+	\]
+	
+	\begin{itemize}
+		\item \( f \) is bijective
+		\item \( f(a + b) = f(a) \cdot f(b) \) for all \( a, b \in \mathbb{Z}_4 \)
+	\end{itemize}
+	
+	Hence, \( f \) is a \textbf{group isomorphism}. Even though the elements differ, the group structure is preserved exactly.
+	
+	\subsection*{Why This Matters}
+	
+	Isomorphisms allow us to focus on structure rather than representation:
+	\begin{itemize}
+		\item In algebra, we often care more about how a group behaves than what its elements are.
+		\item Two groups (or rings, fields, etc.) that are isomorphic are considered \textit{essentially the same} for theoretical purposes.
+	\end{itemize}
+	
+	
+	\section*{Function Properties: Injective, Surjective, Bijective}
+	
+	\subsection*{Domain and Codomain}
+	
+	\begin{itemize}
+		\item \textbf{Domain}: The set of all input values for which the function is defined. This is where the function takes its values from.
+		\item \textbf{Codomain}: The set of all possible outputs the function could return. It includes all values the function is allowed to reach.
+		\item \textbf{Image (or Range)}: The actual outputs the function produces. It is a subset of the codomain. The image equals the codomain only if the function is \textbf{surjective}.
+	\end{itemize}
+	
+	\bigskip
+	
+	\begin{center}
+		\begin{tabular}{| >{\raggedright\arraybackslash}m{2.8cm} 
+				| >{\raggedright\arraybackslash}m{4.8cm} 
+				| >{\raggedright\arraybackslash}m{4.5cm} 
+				| >{\raggedright\arraybackslash}m{4.5cm} 
+				| >{\raggedright\arraybackslash}m{4.5cm} |}
+			\hline
+			\textbf{Property} & \textbf{Definition} & \textbf{Concrete Meaning} & \textbf{Example} & \textbf{Counterexample} \\
+			\hline
+			
+			\textbf{Injective} & Every element in the codomain is mapped by \emph{at most one} element in the domain. 
+			& No two distinct domain values map to the same codomain value. 
+			& \( f(x) = 2x + 1 \), \( \mathbb{R} \to \mathbb{R} \) 
+			& \( f(x) = x^2 \), \( \mathbb{R} \to \mathbb{R} \), since \( f(2) = f(-2) \) \\
+			
+			\hline
+			
+			\textbf{Surjective} & Every element in the codomain is mapped by \emph{at least one} element in the domain.
+			& All codomain values are hit by some domain value. 
+			& \( f(x) = 2x + 3 \), \( \mathbb{R} \to \mathbb{R} \) 
+			& \( f(x) = x^2 \), \( \mathbb{R} \to \mathbb{R} \), since no \( x \) gives \( y = -1 \) \\
+			
+			\hline
+			
+			\textbf{Bijective} & Every element in the codomain is mapped by \emph{exactly one} element in the domain.
+			& The function is both injective and surjective — a perfect one-to-one match.
+			& \( f(x) = x + 5 \), \( \mathbb{R} \to \mathbb{R} \)
+			& \( f(x) = x^2 \), \( \mathbb{R} \to \mathbb{R} \), neither injective nor surjective \\
+			
+			\hline
+		\end{tabular}
+	\end{center}
+
+\subsection*{Corollary 2.2 – Bijections and Two-Sided Inverses (Aluffi, p.13)}
+
+A function \( f: A \to B \) is a \textbf{bijection} if and only if it has a \textbf{two-sided inverse}.
+
+\medskip
+
+\textbf{Definition:} A function \( f \) has a \emph{two-sided inverse} if there exists a function \( g: B \to A \) such that:
+\begin{align*}
+	g \circ f &= \mathrm{id}_A \quad \text{(left inverse)} \\
+	f \circ g &= \mathrm{id}_B \quad \text{(right inverse)}
+\end{align*}
+
+\medskip
+
+\textbf{Explanation:}
+\begin{itemize}
+	\item If \( f \) has both a left and right inverse, then:
+	\begin{itemize}
+		\item \( f \) is injective (left inverse implies no two elements of \( A \) map to the same element in \( B \)),
+		\item \( f \) is surjective (right inverse ensures every element of \( B \) is hit),
+		\item Therefore, \( f \) is bijective.
+	\end{itemize}
+	\item Conversely, if \( f \) is bijective, then there exists a unique inverse \( f^{-1}: B \to A \) such that:
+	\[
+	f^{-1} \circ f = \mathrm{id}_A \quad \text{and} \quad f \circ f^{-1} = \mathrm{id}_B
+	\]
+	So \( f^{-1} \) is a two-sided inverse of \( f \).
+\end{itemize}
+
+\medskip
+
+\textbf{Meaning of “Side”:}
+\begin{itemize}
+	\item \textbf{Left side:} \( g \circ f \) — applies \( f \) first, then \( g \), checks identity on the domain \( A \).
+	\item \textbf{Right side:} \( f \circ g \) — applies \( g \) first, then \( f \), checks identity on the codomain \( B \).
+\end{itemize}
+
+
+
+\subsection*{Morphism, Epimorphism, Isomorphism, Automorphism (Based on Aluffi, Ch.2)}
+
+\begin{center}
+	\renewcommand{\arraystretch}{1.6}
+	\begin{tabular}{|p{3.5cm}|p{11cm}|}
+		\hline
+		\textbf{Concept} & \textbf{Explanation} \\
+		\hline
+		
+		\textbf{Morphism} & A \textbf{morphism} \( f: A \to B \) in a category is a structure-preserving map between two objects \( A \) and \( B \). In \textbf{Set}, it is just a function. Morphisms are the basic arrows in a category. \\
+		
+		\hline
+		
+		\textbf{Epimorphism} & A \textbf{epimorphism} (or \textbf{epi}) is a morphism \( f: A \to B \) such that for any pair of morphisms \( g_1, g_2: B \to C \), if
+		\[
+		g_1 \circ f = g_2 \circ f,
+		\]
+		then \( g_1 = g_2 \). That is, \( f \) is \emph{right-cancellative}. In \textbf{Set}, every \emph{surjective} function is an epimorphism. \\
+		
+		\hline
+		
+		\textbf{Isomorphism} & A morphism \( f: A \to B \) is an \textbf{isomorphism} if there exists a morphism \( g: B \to A \) such that:
+		\[
+		g \circ f = \mathrm{id}_A \quad \text{and} \quad f \circ g = \mathrm{id}_B.
+		\]
+		This means \( f \) is both injective and surjective (a bijection in \textbf{Set}), and has a two-sided inverse. \\
+		
+		\hline
+		
+		\textbf{Automorphism} & An \textbf{automorphism} is an isomorphism \( f: A \to A \), i.e., an isomorphism from an object to itself. It is a \emph{symmetry} of the object. \\
+		
+		\hline
+	\end{tabular}
+\end{center}
+
+
+
+\medskip
+
+\textbf{Examples in \textbf{Set}:}
+
+\begin{itemize}
+	\item \textbf{Right-cancellative (epimorphism) example:} \\
+	\( f: \mathbb{R} \to \mathbb{R} \), \( f(x) = 2x \). This function is surjective, so for any \( g_1, g_2: \mathbb{R} \to C \), if \( g_1 \circ f = g_2 \circ f \), then \( g_1 = g_2 \).
+	
+	\item \textbf{Right-cancellative counterexample:} \\
+	\( f(x) = x^2 \) from \( \mathbb{R} \to \mathbb{R} \) is not surjective (no preimage for \( -1 \)), so not an epimorphism.
+	
+	\item \textbf{Left-cancellative (monomorphism) example:} \\
+	\( f: \mathbb{R} \to \mathbb{R} \), \( f(x) = x + 1 \). It is injective, so for any \( h_1, h_2: X \to \mathbb{R} \), if \( f \circ h_1 = f \circ h_2 \), then \( h_1 = h_2 \).
+	
+	\item \textbf{Left-cancellative counterexample:} \\
+	\( f: \mathbb{R} \to \mathbb{R} \), \( f(x) = 0 \). This is constant and not injective: many \( x \)'s map to the same value, so cancellation fails.
+\end{itemize}
+
+
+\bigskip
+
+\textbf{Examples and Counterexamples}
+
+\begin{itemize}
+	\item \textbf{Morphism Example:} Any function \( f: \mathbb{R} \to \mathbb{R} \), e.g. \( f(x) = x^2 \), is a morphism in \textbf{Set}. It need not be injective or surjective.
+	
+	\item \textbf{Epimorphism Example:} \( f: \mathbb{R} \to \mathbb{R} \), \( f(x) = 2x \), is surjective and thus an epimorphism in \textbf{Set}.
+	
+	\item \textbf{Epimorphism Counterexample:} \( f(x) = x^2 \), \( \mathbb{R} \to \mathbb{R} \), is not surjective (e.g. \( -1 \) is not in the image), so it is not an epimorphism.
+	
+	\item \textbf{Isomorphism Example:} \( f: \mathbb{R} \to \mathbb{R} \), \( f(x) = x + 1 \), is a bijection with inverse \( f^{-1}(x) = x - 1 \), so it is an isomorphism in \textbf{Set}.
+	
+	\item \textbf{Isomorphism Counterexample:} \( f(x) = x^2 \) is not injective and not surjective — no inverse — so not an isomorphism.
+	
+	\item \textbf{Automorphism Example:} \( f: \mathbb{R} \to \mathbb{R} \), \( f(x) = -x \), is a bijective function from \( \mathbb{R} \) to itself with inverse \( f^{-1}(x) = -x \). So it's an automorphism of \( \mathbb{R} \) in \textbf{Set}.
+	
+	\item \textbf{Automorphism Counterexample:} \( f: \mathbb{R} \to \mathbb{R} \), \( f(x) = x^2 \) is not invertible, so it is not an automorphism.
+\end{itemize}
+
+
+\subsection*{Morphisms, Isomorphisms, and Automorphisms (Aluffi, Ch.2) Pt 2}
+
+We summarize the progression of morphism concepts in the category of sets, as introduced in Aluffi’s Chapter 2.
+
+\begin{center}
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabular}{|c|c|p{7cm}|}
+		\hline
+		\textbf{Concept} & \textbf{In \textbf{Set}} & \textbf{Key Property} \\
+		\hline
+		\textbf{Morphism} & Function \( f : A \to B \) & A general map between sets; the basic notion of a structure-preserving transformation in category theory. \\
+		\hline
+		\textbf{Monomorphism} & Injective function & A morphism \( f \) such that for all \( g_1, g_2 : Z \to A \), if \( f \circ g_1 = f \circ g_2 \), then \( g_1 = g_2 \). This means \( f \) is \emph{left-cancellable}. \\
+		\hline
+		\textbf{Epimorphism} & Surjective function & A morphism \( f \) such that for all \( h_1, h_2 : B \to Y \), if \( h_1 \circ f = h_2 \circ f \), then \( h_1 = h_2 \). This means \( f \) is \emph{right-cancellable}. \\
+		\hline
+		\textbf{Isomorphism} & Bijective function & A morphism \( f : A \to B \) such that there exists \( g : B \to A \) with \( g \circ f = \text{id}_A \) and \( f \circ g = \text{id}_B \). This means \( f \) has a \emph{two-sided inverse}. \\
+		\hline
+		\textbf{Automorphism} & Bijective function \( f : A \to A \) & An isomorphism from a set to itself. It represents a \emph{symmetry of structure}: the set remains unchanged, but the elements are permuted in a way that preserves all internal relationships. \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\subsubsection*{Symmetry of Structure}
+An \textbf{automorphism} shows how a set (or more generally, a mathematical structure) can be transformed in a reversible way without changing its essential nature. For example, relabeling elements in a group or rotating a geometric shape are automorphisms: the structure is preserved under the transformation.
+
+\subsection*{Canonical Decomposition of a Function (Aluffi, §2.7–2.8)}
+
+Let \( f: A \to B \) be a function. Define an equivalence relation on \( A \) by:
+\[
+a_1 \sim_f a_2 \iff f(a_1) = f(a_2).
+\]
+Then \( f \) factors canonically as:
+\[
+A \xrightarrow{\pi} A/{\sim_f} \xrightarrow{\widetilde{f}} \operatorname{Im}(f) \xrightarrow{\iota} B,
+\]
+where:
+\begin{itemize}
+	\item \( \pi \) is the projection: \( \pi(a) = [a]_{\sim_f} \)
+	\item \( \widetilde{f}([a]) = f(a) \), well-defined since all elements in the class map to the same value
+	\item \( \iota \) is the inclusion map \( \operatorname{Im}(f) \subseteq B \)
+\end{itemize}
+
+\bigskip
+
+\textbf{Example:}
+
+Let \( f: A = \{1,2,3,4\} \to B = \{a,b\} \) be defined by:
+\[
+f(1) = a, \quad f(2) = a, \quad f(3) = b, \quad f(4) = b.
+\]
+
+\begin{itemize}
+	\item Define \( \sim_f \): \( 1 \sim 2 \), \( 3 \sim 4 \)
+	\item Then \( A/{\sim_f} = \{ [1] = \{1,2\},\; [3] = \{3,4\} \} \)
+	\item \( \pi \) maps: \( 1,2 \mapsto [1] \), \( 3,4 \mapsto [3] \)
+	\item \( \widetilde{f}([1]) = a \), \( \widetilde{f}([3]) = b \)
+	\item \( \operatorname{Im}(f) = \{a,b\} \), and \( \iota \) is identity
+\end{itemize}
+
+\bigskip
+
+So:
+\[
+f = \iota \circ \widetilde{f} \circ \pi,
+\]
+and the structure of \( f \) is expressed via its fibers \( [a]_{\sim_f} \) and image.
+
+% Conceptualization of Objects and Classes in Category Theory
+
+\subsection*{Objects and Classes (following Aluffi):}
+
+A \textit{category} $\mathcal{C}$ consist of : 
+\begin{itemize}
+	\item a \textit{class} $Obj(\mathcal{C})$ of objects and
+\item for every \textit{two} objects $A,B$ of $\mathcal{C}$ a \textbf{set} $Hom_\mathcal{C}$ of \textit{morphisms} witht he following properties
+\end{itemize}
+
+As a prototype keep in mind : \textit{objects as 'sets'} and for \textit{morphisms as 'functions'}. The following example will pose the defining properties for morphisms in a familiar way.
+
+\begin{itemize}
+	\item For every object $A$ of the class $\mathcal{C}$, there exists (at least ) one \textbf{morphism} called $1_A \in Hom_\mathcal{C} (A,A)$
+	\item A \textit{morphism} can be composed (as function do) : two morphism $f \in Hom_\mathcal{C} (A,B)$ and $g \in Hom_\mathcal{C} (B,C)$ determine a \textit{morphism} $gf \in Hom_\mathcal{C} (A,C)$ that is for every \textit{triple} objects $A,B,C$ of $\mathcal{C}$ there is a function (of sets):
+	$$Hom_\mathcal{C} (A,B) \times Hom_\mathcal{C} (B,C) \Rightarrow Hom_\mathcal{C} (A,C)$$
+\end{itemize}
+\section*{Composition in a Category: Formal and Example}
+
+\subsection*{Definition of Category and Hom-Sets}
+
+A \textbf{category} \( \mathcal{C} \) consists of:
+\begin{itemize}
+	\item A class of \textbf{objects}, denoted \( A, B, C, \dots \),
+	\item For every pair of objects \( A, B \in \mathcal{C} \), a set of \textbf{morphisms} (or arrows) from \( A \) to \( B \), denoted:
+	\[
+	\text{Hom}_\mathcal{C}(A, B)
+	\]
+	\item A binary operation called \textbf{composition of morphisms}:
+	\[
+	\circ : \text{Hom}_\mathcal{C}(B, C) \times \text{Hom}_\mathcal{C}(A, B) \to \text{Hom}_\mathcal{C}(A, C)
+	\]
+	such that for any \( f \in \text{Hom}_\mathcal{C}(A, B) \) and \( g \in \text{Hom}_\mathcal{C}(B, C) \), the composition \( g \circ f \in \text{Hom}_\mathcal{C}(A, C) \).
+	\item This composition satisfies:
+	\begin{itemize}
+		\item \textbf{Associativity:} \( h \circ (g \circ f) = (h \circ g) \circ f \)
+		\item \textbf{Identity:} For each object \( A \), there exists \( \text{id}_A \in \text{Hom}_\mathcal{C}(A, A) \) such that for any \( f \in \text{Hom}_\mathcal{C}(A, B) \), we have:
+		\[
+		\text{id}_B \circ f = f = f \circ \text{id}_A
+		\]
+	\end{itemize}
+\end{itemize}
+
+\subsection*{Interpretation of Composition as a Meta-Level Function}
+
+Although morphisms behave like functions in many categories (e.g., \textbf{Set}), the map
+\[
+\circ : \text{Hom}_\mathcal{C}(B, C) \times \text{Hom}_\mathcal{C}(A, B) \to \text{Hom}_\mathcal{C}(A, C)
+\]
+is not a morphism in \( \mathcal{C} \), but a \textit{meta-level} operation. That is, it defines how the morphisms of the category combine, but it does not itself live within the category. This structural rule ensures the internal logic of the category is coherent and closed under composition.
+
+\textbf{Analogy:} Think of a board game. The \emph{pieces and moves} inside the game correspond to the objects and morphisms of a category. However, the \emph{rules of the game} — what moves are legal, and how moves combine — live at a higher level: they are not part of the gameplay itself, but define how the game works. Similarly, composition is a meta-level rule that defines how morphisms must behave, not a morphism within the category.
+
+\subsection*{Example in the Category \textbf{Set}}
+
+Let \( \mathcal{C} = \textbf{Set} \), the category of sets and functions.
+
+\begin{itemize}
+	\item Let \( A = \{1,2\} \), \( B = \{a,b\} \), and \( C = \{x,y\} \).
+	\item Define \( f : A \to B \) by:
+	\[
+	f(1) = a,\quad f(2) = b
+	\]
+	So \( f \in \text{Hom}_\textbf{Set}(A, B) \).
+	\item Define \( g : B \to C \) by:
+	\[
+	g(a) = x,\quad g(b) = y
+	\]
+	So \( g \in \text{Hom}_\textbf{Set}(B, C) \).
+	\item Then the composition \( g \circ f : A \to C \) is given by:
+	\[
+	(g \circ f)(1) = g(f(1)) = g(a) = x,\quad (g \circ f)(2) = g(f(2)) = g(b) = y
+	\]
+	Thus \( g \circ f \in \text{Hom}_\textbf{Set}(A, C) \).
+\end{itemize}
+
+\subsection*{Summary}
+
+The composition operation
+\[
+\circ : \text{Hom}_\mathcal{C}(B, C) \times \text{Hom}_\mathcal{C}(A, B) \to \text{Hom}_\mathcal{C}(A, C)
+\]
+is a function defined at the meta-level. It specifies how morphisms are composed across all of \( \mathcal{C} \), and guarantees associativity and identity properties essential to the definition of a category. This abstraction allows category theory to capture the essential structure of mathematical processes across diverse fields.
+
+\section*{Endomorphisms and Pointed Sets}
+
+\subsection*{Endomorphism}
+
+Let \( \mathcal{C} \) be a category. An \textbf{endomorphism} of an object \( A \in \mathcal{C} \) is a morphism from the object to itself:
+\[
+\text{End}_\mathcal{C}(A) := \text{Hom}_\mathcal{C}(A, A)
+\]
+That is, any morphism \( f: A \to A \) in \( \mathcal{C} \) is called an endomorphism of \( A \).
+
+\textbf{Remarks:}
+\begin{itemize}
+	\item The identity morphism \( \text{id}_A \) is always an endomorphism.
+	\item The set of all endomorphisms \( \text{End}_\mathcal{C}(A) \) typically carries extra structure, e.g., it forms a monoid under composition.
+\end{itemize}
+
+\subsubsection*{Example in \textbf{Set}}
+
+Let \( A = \{1, 2, 3\} \). A function \( f: A \to A \) such that
+\[
+f(1) = 2, \quad f(2) = 3, \quad f(3) = 1
+\]
+is an endomorphism in the category \( \textbf{Set} \), because it maps \( A \) to itself.
+
+\section*{Cancellability in Categories}
+
+\subsection*{Definition}
+
+Let \( \mathcal{C} \) be a category. A morphism \( f \in \text{Hom}_\mathcal{C}(A, B) \) is:
+
+\begin{itemize}
+	\item \textbf{Left-cancellable} if for all morphisms \( g_1, g_2 : X \to A \), we have:
+	\[
+	f \circ g_1 = f \circ g_2 \quad \Rightarrow \quad g_1 = g_2
+	\]
+	
+	\item \textbf{Right-cancellable} if for all morphisms \( h_1, h_2 : B \to Y \), we have:
+	\[
+	h_1 \circ f = h_2 \circ f \quad \Rightarrow \quad h_1 = h_2
+	\]
+\end{itemize}
+
+\textbf{Interpretation:}  
+Cancellability is an abstract analog of injectivity and surjectivity:
+\begin{itemize}
+	\item Left-cancellability resembles \textbf{injectivity}.
+	\item Right-cancellability resembles \textbf{surjectivity}.
+\end{itemize}
+
+\subsection*{Example: Category \textbf{Set}}
+
+Let \( f: A \to B \) be a function.
+
+\begin{itemize}
+	\item \( f \) is left-cancellable \( \Leftrightarrow \) \( f \) is injective.
+	
+	\textbf{Example (left-cancellable):}  
+	Let \( f: \{1,2\} \to \{a,b\} \), \( f(1) = a, f(2) = b \).  
+	This is injective, so if \( f \circ g_1 = f \circ g_2 \), then \( g_1 = g_2 \).
+	
+	\textbf{Counterexample (not left-cancellable):}  
+	Let \( f: \{1,2\} \to \{a\} \), with \( f(1) = a = f(2) \).  
+	Define \( g_1, g_2: X = \{x\} \to \{1,2\} \) with:
+	\[
+	g_1(x) = 1,\quad g_2(x) = 2
+	\]
+	Then \( f \circ g_1 = f \circ g_2 \) but \( g_1 \neq g_2 \). So \( f \) is not left-cancellable.
+	
+	\item \( f \) is right-cancellable \( \Leftrightarrow \) \( f \) is surjective.
+	
+	\textbf{Example (right-cancellable):}  
+	Let \( f: \{1,2\} \to \{a\} \), \( f(1) = a = f(2) \).  
+	Let \( h_1, h_2: \{a\} \to \{0,1\} \) be:
+	\[
+	h_1(a) = 0, \quad h_2(a) = 0 \quad \Rightarrow \quad h_1 \circ f = h_2 \circ f
+	\]
+	Here \( h_1 = h_2 \), so cancellation holds — but this is vacuous unless we pick non-equal functions.
+	
+	\textbf{Counterexample (not right-cancellable):}  
+	Let \( f: \{1\} \to \{a,b\} \) with \( f(1) = a \).  
+	Let \( h_1, h_2: \{a,b\} \to \{0,1\} \) be:
+	\[
+	h_1(a) = 0, h_1(b) = 1; \quad h_2(a) = 0, h_2(b) = 0
+	\]
+	Then \( h_1 \circ f = h_2 \circ f \), but \( h_1 \neq h_2 \). So \( f \) is not right-cancellable.
+\end{itemize}
+
+\subsection*{Summary}
+
+\begin{itemize}
+	\item A morphism is \textbf{left-cancellable} if it can be cancelled on the left: this reflects injectivity in \textbf{Set}.
+	\item A morphism is \textbf{right-cancellable} if it can be cancelled on the right: this reflects surjectivity in \textbf{Set}.
+	\item Not all morphisms in general categories have these properties — cancellation is a structural condition.
+\end{itemize}
+
+\section*{Purpose of Cancellability in Categories}
+
+\subsection*{Why Cancellability Matters}
+
+Cancellability in category theory plays a role analogous to algebraic cancellation:
+\begin{itemize}
+	\item In basic algebra, if \( ab = ac \) and \( a \neq 0 \), we deduce \( b = c \).
+	\item In category theory, if \( f \circ g_1 = f \circ g_2 \) and \( f \) is left-cancellable, then \( g_1 = g_2 \).
+\end{itemize}
+
+\subsection*{Main Uses}
+
+\begin{itemize}
+	\item \textbf{Simplifying morphism equations:}  
+	Cancellability allows us to isolate morphisms from compositions, aiding in solving morphism equations.
+	
+	\item \textbf{Ensuring uniqueness in diagrams:}  
+	In categorical constructions (like products, pullbacks), uniqueness often follows by cancellation.
+	
+	\item \textbf{Characterizing morphism types:}
+	\begin{itemize}
+		\item Left-cancellability characterizes \textbf{monomorphisms} (categorical injectivity).
+		\item Right-cancellability characterizes \textbf{epimorphisms} (categorical surjectivity).
+	\end{itemize}
+	
+	\item \textbf{Working element-free:}  
+	Cancellability lets us reason abstractly, without referring to elements inside objects.
+\end{itemize}
+
+\subsection*{Illustrative Examples in \textbf{Set}}
+
+\subsubsection*{Left-Cancellability (Injective Case)}
+
+Let:
+\[
+f : \{1,2\} \to \{a,b\}, \quad f(1) = a,\ f(2) = b
+\]
+This is injective. Suppose \( g_1, g_2: \{x\} \to \{1,2\} \) defined by:
+\[
+g_1(x) = 1, \quad g_2(x) = 1 \quad \Rightarrow \quad f \circ g_1 = f \circ g_2 = a
+\]
+Since \( f \) is injective, \( f \circ g_1 = f \circ g_2 \Rightarrow g_1 = g_2 \). So \( f \) is left-cancellable.
+
+\subsubsection*{Left-Cancellation Fails (Non-injective)}
+
+Let:
+\[
+f : \{1,2\} \to \{a\}, \quad f(1) = a,\ f(2) = a
+\]
+Define \( g_1(x) = 1, g_2(x) = 2 \). Then:
+\[
+f \circ g_1(x) = a = f \circ g_2(x), \quad \text{but } g_1 \neq g_2
+\]
+So \( f \) is not left-cancellable.
+
+\subsubsection*{Right-Cancellability (Surjective Case)}
+
+Let:
+\[
+f: \{1,2\} \to \{a\}, \quad f(1) = f(2) = a
+\]
+Let \( h_1, h_2: \{a\} \to \{0,1\} \) defined by:
+\[
+h_1(a) = 0, \quad h_2(a) = 0 \Rightarrow h_1 \circ f = h_2 \circ f
+\]
+But here \( h_1 = h_2 \), so cancellation is trivial. If all such pairs must agree this way, \( f \) is right-cancellable.
+
+\subsubsection*{Right-Cancellation Fails (Non-surjective)}
+
+Let:
+\[
+f : \{1\} \to \{a,b\}, \quad f(1) = a
+\]
+Define \( h_1, h_2: \{a,b\} \to \{0,1\} \) as:
+\[
+h_1(a) = 0,\ h_1(b) = 1; \quad h_2(a) = 0,\ h_2(b) = 0
+\]
+Then:
+\[
+h_1 \circ f = h_2 \circ f = 0, \quad \text{but } h_1 \neq h_2
+\]
+So \( f \) is not right-cancellable.
+
+\subsection*{Conclusion}
+
+\begin{itemize}
+	\item Cancellability generalizes the notion of cancellation from algebra.
+	\item It helps simplify morphism equalities, ensures uniqueness in categorical constructions, and defines key morphism types (monos and epis).
+	\item It is essential for abstract reasoning in element-free, structural mathematics.
+\end{itemize}
+
+
+\subsection*{Pointed Set}
+
+A \textbf{pointed set} is a pair \( (X, x_0) \), where:
+\begin{itemize}
+	\item \( X \) is a set,
+	\item \( x_0 \in X \) is a distinguished element called the \emph{basepoint}.
+\end{itemize}
+
+In category theory, the category of pointed sets is usually denoted \( \textbf{Set}_* \). A morphism between pointed sets \( (X, x_0) \) and \( (Y, y_0) \) is a function \( f: X \to Y \) such that:
+\[
+f(x_0) = y_0
+\]
+That is, morphisms must preserve basepoints.
+
+\subsubsection*{Example}
+
+Let:
+\[
+X = \{a, b, c\}, \quad x_0 = a \quad \Rightarrow \quad (X, a)
+\]
+\[
+Y = \{1, 2, 3\}, \quad y_0 = 1 \quad \Rightarrow \quad (Y, 1)
+\]
+Define \( f: X \to Y \) by:
+\[
+f(a) = 1, \quad f(b) = 2, \quad f(c) = 3
+\]
+Then \( f \) is a morphism of pointed sets because it respects the basepoint: \( f(a) = 1 \).
+
+\subsection*{Summary}
+
+\begin{itemize}
+	\item An \textbf{endomorphism} is a morphism from an object to itself: \( f: A \to A \).
+	\item A \textbf{pointed set} is a set with a chosen element (basepoint), and morphisms between pointed sets must preserve basepoints.
+\end{itemize}
+
+\subsection*{Abstraction in Category Theory}
+
+Category theory operates at a higher level of abstraction than set theory or classical algebra.
+
+\begin{itemize}
+	\item In \textbf{set theory}, the focus is on elements inside sets and their membership relations.
+	\item In \textbf{category theory}, the focus shifts to \emph{objects} and \emph{morphisms} between them, abstracting away from the internal structure.
+\end{itemize}
+
+\textbf{Key idea:} Rather than working with elements, category theory studies how structures relate to each other via morphisms. 
+
+\subsubsection*{Higher Abstraction in Practice}
+
+Concepts like:
+\begin{itemize}
+	\item \textbf{Endomorphism} — a morphism from an object to itself,
+	\item \textbf{Pointed set} — a set with a distinguished element (basepoint),
+\end{itemize}
+are examples of this abstraction. They emphasize structural behavior and relationships rather than specific contents.
+
+\textbf{Why this matters:}
+\begin{itemize}
+	\item This abstraction allows us to treat sets, groups, topological spaces, etc., using the same language.
+	\item It reveals patterns and analogies across different areas of mathematics.
+\end{itemize}
+
+Hence, category theory is often called the \emph{mathematics of mathematics}.
+
+\subsection*{Catergories}
+
+Intuitively , a 'Categorie' may let us think of sets, in that they are '\textit{collection of objects}' and further they will be notions of '\textit{functions from categories to categories}' (called \textit{functors}).\vspace{0.5cm}
+
+\textbf{Definition} : A \textbf{category} consist of a collection of 'objects' and of 'morphisms' between these objects satisfying a list of natural conditions. \\
+For example we will use 'collection' instead of \textit{set of objects} . If we want to have a 'category of sets', in which the 'objects' are sets and the 'morphisms' are the functions between the sets, this is not a \textit{a set of all sets}. The collection of all sets is 'too big' to be a set . To deal with such 'collections' we will use the concept of \textbf{class}. All these concepts are just tools to abstract (encode) even more. \\
+
+Formally : A \textit{category} $C$ consist of 
+\begin{itemize}
+	\item a class $Obj(C) of objects of the category; and$
+	\item for every \textit{two} objects $A,B$ of $C$,there is a set of morphisms $Hom_C (A,B)$.
+\end{itemize}
+
+As a prototype to keep in mind is to think of the \textit{objects as 'sets'} and the \textit{morphisms as 'functions}. The properties of 'morphisms' in $C$ have:
+\begin{itemize}
+	\item For every object $A$ of $C$, there exists (at least) one morphism $1_A \in Hom_C (A,A)$, the 'identity' on $A$.
+	\item One can compose morphisms: two morphisms $f \in Hom_C (A,B)$ and $g \in Hom_C (B,C)$, determine a morphism $gf \in Hom_C (A,C)$, that is for every triple object $A$, $B$, $C$ of $C$ there is a function (of sets)
+	$$Hom_C (A,B) \times Hom_C (B,C) \rightarrow Hom_C (A,C)$$
+	 and the image of the pair $(f,g)$ is denoted $gf$. The above (cross product if you will) tells us the following : \textbf{this is how the \textit{morphisms} in $C$ behave } , and it must not be confused as a 'morphism' inside $C$
+	\item This 'composition law' is associatuve : if $f \in Hom_C (A,B)$, $g \in Hom_C (B,C)$ and $h \in Hom_C (C,D)$ then 
+	$$(hg)f = h(gf)$$
+    \item The identity morphisms are identities with respect to \textit{composition}, that is $\forall f \in Hom_C(A,B)$ we have 
+    $$f1_A = f$$
+    and 
+    $$1_B f = f$$
+\end{itemize}
+ Again, just keekp thinking \textit{just think of functions of sets}
+ \\
+ A final requirement is that the sets are \textbf{disjoint}, unless $A = C$, $B = D$. That is,\textit{if two functions are one and the same, then necessarily they have \textbf{the same source and the same target} : source and target are part of the \textbf{datum} of a set-function}
+ 
+ \subsection*{Example 3.4}
+ 	Let $S$ be a set. We define a category $\widehat{S}$ as follows:
+ 	\begin{itemize}
+ 		\item The objects of $\widehat{S}$ are the elements of the power set $\mathcal{P}(S)$, that is, $\mathrm{Obj}(\widehat{S}) = \mathcal{P}(S)$.
+ 		\item For any $A, B \subseteq S$, we define the morphisms as:
+ 		\[
+ 		\mathrm{Hom}_{\widehat{S}}(A, B) =
+ 		\begin{cases}
+ 			\{(A, B)\} & \text{if } A \subseteq B, \\
+ 			\varnothing & \text{otherwise}.
+ 		\end{cases}
+ 		\]
+ 	\end{itemize}
+ 	
+ 	This defines a category:
+ 	\begin{itemize}
+ 		\item Each object $A$ has an identity morphism $(A, A)$ since $A \subseteq A$.
+ 		\item Morphism composition is defined by:
+ 		\[
+ 		(B, C) \circ (A, B) = (A, C),
+ 		\]
+ 		whenever $A \subseteq B$ and $B \subseteq C$, which implies $A \subseteq C$.
+ 		\item Associativity holds because subset inclusion is transitive.
+ 	\end{itemize}
+ 	
+ 	Thus, $\widehat{S}$ is a small category that encodes the partial order of inclusion on the power set of $S$.
+  
+  \begin{proposition}[Proposition 4.2]
+  	The inverse of an isomorphism is unique.
+  \end{proposition}
+  
+  \begin{proof}
+  	Suppose $f : A \to B$ is an isomorphism and $g_1, g_2 : B \to A$ are both inverses of $f$.
+  	
+  	Then:
+  	\[
+  	f \circ g_1 = \mathrm{id}_B = f \circ g_2 \quad \text{and} \quad g_1 \circ f = \mathrm{id}_A = g_2 \circ f
+  	\]
+  	
+  	To show $g_1 = g_2$, we use associativity:
+  	\[
+  	g_1 = g_1 \circ \mathrm{id}_B = g_1 \circ (f \circ g_2) = (g_1 \circ f) \circ g_2 = \mathrm{id}_A \circ g_2 = g_2
+  	\]
+  	
+  	Hence, the inverse of $f$ is unique.
+  \end{proof}
+  
+  \noindent
+  \textbf{Remark:} This argument also proves that if a morphism $f$ has a left-inverse $g_1$ and a right-inverse $g_2$, then $f$ is an isomorphism and $g_1 = g_2$. Thus, the inverse is unique and denoted unambiguously as $f^{-1}$.
+  
+  \subsection*{Monomorphisms and Epimorphisms in Categories (Aluffi Ch.1 §4.2)}
+  
+  In general categories, we cannot define injectivity and surjectivity as in set theory, since the concept of ``element'' may not exist for arbitrary objects. However, we can define morphisms that behave like injective and surjective functions through their \emph{cancellation properties}. These are called \textbf{monomorphisms} and \textbf{epimorphisms}.
+  
+  \begin{definition}[Monomorphism, Def. 4.7]
+  	Let $\mathcal{C}$ be a category. A morphism $f \in \mathrm{Hom}_{\mathcal{C}}(A, B)$ is called a \textbf{monomorphism} (or \emph{mono}) if for all objects $Z$ in $\mathcal{C}$ and all morphisms $\alpha_1, \alpha_2 \in \mathrm{Hom}_{\mathcal{C}}(Z, A)$:
+  	\[
+  	f \circ \alpha_1 = f \circ \alpha_2 \Rightarrow \alpha_1 = \alpha_2
+  	\]
+  	This means $f$ is \emph{left-cancellable}.
+  \end{definition}
+  
+  \begin{definition}[Epimorphism, Def. 4.8]
+  	Let $\mathcal{C}$ be a category. A morphism $f \in \mathrm{Hom}_{\mathcal{C}}(A, B)$ is called an \textbf{epimorphism} (or \emph{epi}) if for all objects $Z$ in $\mathcal{C}$ and all morphisms $\beta_1, \beta_2 \in \mathrm{Hom}_{\mathcal{C}}(B, Z)$:
+  	\[
+  	\beta_1 \circ f = \beta_2 \circ f \Rightarrow \beta_1 = \beta_2
+  	\]
+  	This means $f$ is \emph{right-cancellable}.
+  \end{definition}
+  
+  \vspace{1em}
+  \textbf{Remarks:}
+  \begin{itemize}
+  	\item These definitions are purely in terms of morphisms and composition, and thus apply in any category, even without elements.
+  	\item In \textbf{Set}, monomorphisms are exactly injective functions, and epimorphisms are exactly surjective functions.
+  	\item However, in other categories, the behavior may differ. For example, in some categories, epimorphisms need not be surjective.
+  \end{itemize}
+  
+  \vspace{1em}
+  \textbf{Examples:}
+  \begin{enumerate}
+  	\item \textbf{Set}: Let $f: \mathbb{N} \to \mathbb{Z}$ be the inclusion map. Then:
+  	\begin{itemize}
+  		\item $f$ is a monomorphism: injective $\Rightarrow$ left-cancellable.
+  		\item $f$ is not an epimorphism: not surjective $\Rightarrow$ not right-cancellable.
+  	\end{itemize}
+  	
+  	\item \textbf{Groups}: Let $f: \mathbb{Z} \to \mathbb{Z}/2\mathbb{Z}$ be the canonical projection $n \mapsto \bar{n} \mod 2$.
+  	\begin{itemize}
+  		\item $f$ is an epimorphism: every element of $\mathbb{Z}/2\mathbb{Z}$ is hit.
+  		\item $f$ is not a monomorphism: kernel is $2\mathbb{Z}$ $\Rightarrow$ not injective.
+  	\end{itemize}
+  \end{enumerate}
+  
+  % --- Universal Properties and Example 5.2 ---
+  \subsection*{1.5 Universal Properties}
+  
+  Universal properties provide a high-level language to describe constructions in mathematics by their \emph{behavior} rather than their \emph{content}. This perspective allows us to recognize familiar structures across seemingly different contexts. It's a kind of ``bird's-eye view'' of mathematical objects.
+  
+  \subsubsection*{Initial and Final Objects}
+  
+  \begin{definition}[Initial Object]
+  	An object $I$ in a category $\mathcal{C}$ is called \emph{initial} if for every object $A$ in $\mathcal{C}$, there exists a \textbf{unique} morphism:
+  	\[
+  	\exists! \ \varphi_A \in \mathrm{Hom}_{\mathcal{C}}(I, A)
+  	\]
+  \end{definition}
+  
+  \begin{definition}[Final Object]
+  	An object $F$ in a category $\mathcal{C}$ is called \emph{final} if for every object $A$ in $\mathcal{C}$, there exists a \textbf{unique} morphism:
+  	\[
+  	\exists! \ \psi_A \in \mathrm{Hom}_{\mathcal{C}}(A, F)
+  	\]
+  \end{definition}
+  
+  \subsubsection*{Example 5.2 – No Initial or Final Object in $\mathbb{Z}_{\le}$}
+  
+  Let $\mathcal{C}$ be the category where:
+  \begin{itemize}
+  	\item Objects are integers $\mathbb{Z}$.
+  	\item There is a unique morphism $a \to b$ if and only if $a \le b$.
+  \end{itemize}
+  
+  This defines a \emph{poset category}, where morphisms reflect the usual order $\le$ on integers.
+  
+  \paragraph{Claim:} $\mathcal{C}$ has no initial object.
+  
+  \begin{proof}
+  	An initial object $i$ would satisfy $i \le a$ for all $a \in \mathbb{Z}$. But $\mathbb{Z}$ has no least element—given any integer $i$, we can always find $a = i - 1$ such that $i \nleq a$. Hence, no such $i$ exists.
+  \end{proof}
+  
+  \paragraph{Claim:} $\mathcal{C}$ has no final object.
+  
+  \begin{proof}
+  	A final object $f$ would satisfy $a \le f$ for all $a \in \mathbb{Z}$. But $\mathbb{Z}$ has no greatest element—given any $f$, $f + 1$ is not $\le f$. Hence, no such $f$ exists.
+  \end{proof}
+  
+  \paragraph{Conclusion:} The category $(\mathbb{Z}, \le)$ has neither an initial nor a final object.
+  
+  \subsubsection*{Contrast: Example 3.6}
+  
+  In a different poset, such as $\mathbb{N} \times \mathbb{N}$ ordered by:
+  \[
+  (a, b) \le (c, d) \iff a \le c \text{ and } b \le d
+  \]
+  a final object may exist. For example, $(3,3)$ is a final object if all other elements are less than or equal to it. However, there is still no initial object unless a least pair exists.
+  
+  \paragraph{Moral:} Initial and final objects express a universal property—they are determined by the existence of unique morphisms to or from every object—and their existence depends heavily on the structure of the category.
+  
+  \subsection*{Universal properties second view}
+  A construction satisfies a \textit{universal property} ( or 'it's the solution to a universal problem) when it may be viewed as a \textit{terminal object of a category.} The category depends on the context and usually defined or explained in plain words without even mentioning the word 'category. \\
+  
+  For example the statement such as $\emptyset$ is \textit{universal with respect to the property of mapping to sets;} that is , $\emptyset$ is the inital category in $Set$
+  
+  % --- Quotients via Universal Properties (Sections 5.2 & 5.3) ---
+  \subsection*{1.5.2 Quotients}
+  
+  In naive set theory, the quotient of a set $A$ by an equivalence relation $\sim$ is constructed as the set of equivalence classes:
+  \[
+  A/{\sim} = \{ [a]_{\sim} \mid a \in A \}
+  \]
+  However, this construction alone is limited — it gives us a set but says nothing about how this quotient interacts with morphisms in a categorical context. To fully capture its behavior, we reinterpret quotients using \textbf{universal properties}.
+  
+  \paragraph{Universal Property of the Quotient.}
+  Given a set $A$ and an equivalence relation $\sim$, there is a canonical surjection:
+  \[
+  \pi : A \longrightarrow A/{\sim}
+  \]
+  satisfying:
+  \begin{itemize}
+  	\item $\pi(a) = \pi(b) \iff a \sim b$;
+  	\item For any function $f : A \to B$ that respects $\sim$, i.e.,
+  	\[
+  	a \sim b \Rightarrow f(a) = f(b),
+  	\]
+  	there exists a \textbf{unique} function $\tilde{f} : A/{\sim} \to B$ such that:
+  	\[
+  	f = \tilde{f} \circ \pi.
+  	\]
+  \end{itemize}
+  
+  This means the quotient $A/{\sim}$ is characterized not just as a set, but as a \textbf{universal recipient} of all maps that respect the equivalence relation.
+  
+  \paragraph{Comparison with Set-Theoretic Quotients.}
+  \begin{center}
+  	\begin{tabular}{|c|c|c|}
+  		\hline
+  		\textbf{Aspect} & \textbf{Set-Theoretic Quotient} & \textbf{Categorical Quotient} \\
+  		\hline
+  		Construction & Collection of equivalence classes & Defined via universal property \\
+  		\hline
+  		Focus & Elements and classes & Morphisms and uniqueness \\
+  		\hline
+  		Purpose & Partition of a set & Structure-preserving factorization \\
+  		\hline
+  		Application & Sets & Any category (e.g., \textbf{Set}, \textbf{Grp}, \textbf{Top}) \\
+  		\hline
+  	\end{tabular}
+  \end{center}
+  
+  \paragraph{Example 1 (Set).}
+  Let $A = \{1, 2, 3, 4\}$, and define an equivalence relation $\sim$ by:
+  \[
+  1 \sim 2,\quad 3 \sim 4.
+  \]
+  Then:
+  \[
+  A/{\sim} = \{ [1] = \{1, 2\},\ [3] = \{3, 4\} \}.
+  \]
+  Let $f : A \to \mathbb{Z}$ be defined by:
+  \[
+  f(1) = f(2) = 0,\quad f(3) = f(4) = 1.
+  \]
+  This $f$ respects $\sim$, and so there exists a unique map:
+  \[
+  \tilde{f} : A/{\sim} \to \mathbb{Z},\quad \tilde{f}([1]) = 0,\ \tilde{f}([3]) = 1
+  \]
+  such that $f = \tilde{f} \circ \pi$.
+  
+  \subsection*{1.5.3 Quotients in a General Category}
+  
+  The concept of a quotient can be abstracted to arbitrary categories beyond \textbf{Set}, such as \textbf{Grp}, \textbf{Top}, etc.
+  
+  \paragraph{Setup.} Let $f : A \to B$ be a morphism in a category $\mathcal{C}$. Define an equivalence relation on $A$ by:
+  \[
+  a \sim_f a' \iff f(a) = f(a').
+  \]
+  We seek a categorical quotient $A/{\sim_f}$ and a morphism:
+  \[
+  \pi : A \longrightarrow A/{\sim_f}
+  \]
+  satisfying the universal property:
+  
+  \begin{itemize}
+  	\item $\pi(a) = \pi(a') \iff f(a) = f(a')$;
+  	\item There exists a \textbf{unique} morphism $\tilde{f} : A/{\sim_f} \to B$ such that:
+  	\[
+  	f = \tilde{f} \circ \pi.
+  	\]
+  \end{itemize}
+  
+  This means any morphism $f$ that identifies elements in a certain way can be factored through a universal quotient object $A/{\sim_f}$.
+  
+  \paragraph{Commutative Diagram.}
+  \[
+  \begin{tikzcd}
+  	A \arrow[r, "\pi"] \arrow[dr, "f"'] & A/{\sim_f} \arrow[d, "\tilde{f}"] \\
+  	& B
+  \end{tikzcd}
+  \]
+  
+  \paragraph{Example 2 (Group).}
+  Let $G = \mathbb{Z}$ and define $f : \mathbb{Z} \to \mathbb{Z}_3$ by:
+  \[
+  f(n) = n \mod 3.
+  \]
+  Then:
+  \begin{itemize}
+  	\item $n \sim m \iff f(n) = f(m) \iff n \equiv m \pmod{3}$;
+  	\item The quotient object is $\mathbb{Z}_3$;
+  	\item The projection map $\pi : \mathbb{Z} \to \mathbb{Z}_3$ is the canonical mod 3 map;
+  	\item The induced morphism $\tilde{f}$ is the identity map on $\mathbb{Z}_3$.
+  \end{itemize}
+  
+  This example satisfies the universal property in the category \textbf{Grp}, showing that quotient objects generalize beyond sets into structured contexts.
+  
+  \paragraph{Summary.}
+  \begin{itemize}
+  	\item The categorical quotient of a morphism $f : A \to B$ is the object through which $f$ factors uniquely via a universal property.
+  	\item In \textbf{Set}, this coincides with equivalence classes.
+  	\item In structured categories like \textbf{Grp}, \textbf{Top}, or \textbf{Mod}, it yields quotients that preserve the underlying structure.
+  	\item The power of the categorical approach lies in defining objects \emph{by their behavior} — not by how we construct them, but by how they interact with morphisms.
+  \end{itemize}
+  
+  % --- Sections 5.4 and 5.5: Products and Coproducts ---
+  
+  \subsection*{1.5.4 Products}
+  
+  In category theory, the \emph{product} of two objects is defined not by its elements, but by its behavior through morphisms. It is a construction governed by a universal property.
+  
+  \begin{definition}[Product]
+  	Let $A$ and $B$ be objects in a category $\mathcal{C}$. A \emph{product} of $A$ and $B$ is an object $A \times B$ together with morphisms (called projections)
+  	\[
+  	p_1 : A \times B \to A,\quad p_2 : A \times B \to B
+  	\]
+  	such that for any object $Z$ with morphisms $f : Z \to A$ and $g : Z \to B$, there exists a \textbf{unique} morphism $u : Z \to A \times B$ such that:
+  	\[
+  	p_1 \circ u = f,\quad p_2 \circ u = g
+  	\]
+  	This property is captured in the following commutative diagram:
+  	\[
+  	\begin{tikzcd}
+  		& Z \arrow[dl, "f"'] \arrow[dr, "g"] \arrow[dashed]{d}{\exists! u} & \\
+  		A & A \times B \arrow[l, "p_1"] \arrow[r, "p_2"'] & B
+  	\end{tikzcd}
+  	\]
+  \end{definition}
+  
+  \paragraph{Example 1 (Set).}
+  Let $A = \{1, 2\}$ and $B = \{x, y\}$. Then $A \times B = \{(1,x), (1,y), (2,x), (2,y)\}$, with projections:
+  \[
+  p_1(a, b) = a,\quad p_2(a, b) = b
+  \]
+  For any $f : Z \to A$ and $g : Z \to B$, the unique map $u : Z \to A \times B$ is given by $u(z) = (f(z), g(z))$.
+  
+  \paragraph{Example 2 (Grp).}
+  Let $A = \mathbb{Z}$ and $B = \mathbb{Z}_2$. Then $A \times B = \mathbb{Z} \times \mathbb{Z}_2$ is the direct product group with pointwise addition. The universal property holds for any pair of homomorphisms $f : G \to \mathbb{Z}$ and $g : G \to \mathbb{Z}_2$, where:
+  \[
+  u(g) = (f(g), g(g))
+  \]
+  
+  \subsubsection*{Comparison with Set Theory}
+  \begin{center}
+  	\begin{tabular}{|c|c|c|}
+  		\hline
+  		\textbf{Aspect} & \textbf{Set Product} & \textbf{Categorical Product} \\
+  		\hline
+  		Definition & Set of pairs $(a,b)$ & Universal morphism property \\
+  		\hline
+  		Focus & Elements/tuples & Morphisms/uniqueness \\
+  		\hline
+  		Category & Set & Any (e.g., Set, Grp, Top) \\
+  		\hline
+  	\end{tabular}
+  \end{center}
+  
+  \subsection*{1.5.5 Coproducts}
+  
+  Coproducts are the dual notion to products. Instead of projecting from a joint object, we inject into it.
+  
+  \begin{definition}[Coproduct]
+  	Let $A$ and $B$ be objects in a category $\mathcal{C}$. A \emph{coproduct} of $A$ and $B$ is an object $A \amalg B$ together with morphisms (called injections)
+  	\[
+  	i_1 : A \to A \amalg B,\quad i_2 : B \to A \amalg B
+  	\]
+  	such that for any object $Z$ with morphisms $f : A \to Z$, $g : B \to Z$, there exists a \textbf{unique} morphism $u : A \amalg B \to Z$ such that:
+  	\[
+  	u \circ i_1 = f,\quad u \circ i_2 = g
+  	\]
+  	This is represented by the diagram:
+  	\[
+  	\begin{tikzcd}
+  		A \arrow[r, "i_1"] \arrow[dr, "f"'] & A \amalg B \arrow[d, dashed, "\exists! u"] & B \arrow[l, "i_2"'] \arrow[dl, "g"] \\
+  		& Z &
+  	\end{tikzcd}
+  	\]
+  \end{definition}
+  
+  \paragraph{Example 3 (Set).}
+  Let $A = \{1, 2\}$ and $B = \{x, y\}$. Then:
+  \[
+  A \amalg B = \{(1,A), (2,A), (x,B), (y,B)\}
+  \]
+  The injections are:
+  \[
+  i_1(a) = (a, A),\quad i_2(b) = (b, B)
+  \]
+  Given $f : A \to Z$, $g : B \to Z$, define $u : A \amalg B \to Z$ by:
+  \[
+  u(a, A) = f(a),\quad u(b, B) = g(b)
+  \]
+  
+  \paragraph{Example 4 (Grp).}
+  Let $A = \mathbb{Z}$ and $B = \mathbb{Z}$. Then $A \amalg B = \mathbb{Z} * \mathbb{Z}$, the free group on two generators. For any homomorphisms $f, g : \mathbb{Z} \to G$, there is a unique extension $u : \mathbb{Z} * \mathbb{Z} \to G$ such that:
+  \[
+  u \circ i_1 = f,\quad u \circ i_2 = g
+  \]
+  
+  \subsubsection*{Comparison with Set Theory}
+  \begin{center}
+  	\begin{tabular}{|c|c|c|}
+  		\hline
+  		\textbf{Aspect} & \textbf{Set Coproduct} & \textbf{Categorical Coproduct} \\
+  		\hline
+  		Definition & Disjoint union with tags & Universal morphism property \\
+  		\hline
+  		Focus & Tagged elements & Morphism extension \\
+  		\hline
+  		Category & Set & Any (e.g., Set, Grp, Top) \\
+  		\hline
+  	\end{tabular}
+  \end{center}
+  
+  \subsection*{Product vs. Coproduct Summary}
+  
+  \begin{center}
+  	\begin{tabular}{|c|c|c|c|c|}
+  		\hline
+  		\textbf{Notion} & \textbf{Maps From} & \textbf{Maps To} & \textbf{Set} & \textbf{Grp} \\
+  		\hline
+  		Product & $Z \to A$, $Z \to B$ & $Z \to A \times B$ & Cartesian product & Direct product \\
+  		\hline
+  		Coproduct & $A \to Z$, $B \to Z$ & $A \amalg B \to Z$ & Disjoint union & Free product \\
+  		\hline
+  	\end{tabular}
+  \end{center}
+  
+  \subsection*{Summary Table: Universal Properties in Categories vs. Sets}
+  
+  \begin{center}
+  	\renewcommand{\arraystretch}{1.4}
+  	\begin{tabular}{|c|c|c|c|c|}
+  		\hline
+  		\textbf{Construction} & \textbf{Category Theory (Universal Property)} & \textbf{Set-Theoretic Analog} & \textbf{Morphisms Defined By} & \textbf{Typical Example} \\
+  		\hline
+  		\textbf{Initial Object} & Unique map \emph{from} initial object to any object & Empty set in \textbf{Set} & $\exists! \ f: I \to A$ & $0$ in \textbf{Ab} \\
+  		\hline
+  		\textbf{Final Object} & Unique map \emph{to} final object from any object & Singleton set in \textbf{Set} & $\exists! \ f: A \to F$ & $1$ in \textbf{Set} \\
+  		\hline
+  		\textbf{Product} & Unique map \emph{to} product making two projections commute & Cartesian product $A \times B$ & $f: Z \to A$, $g: Z \to B$ & $(f(z), g(z))$ \\
+  		\hline
+  		\textbf{Coproduct} & Unique map \emph{from} coproduct making injections commute & Disjoint union $A \amalg B$ & $f: A \to Z$, $g: B \to Z$ & Tagged unions \\
+  		\hline
+  		\textbf{Equalizer} & Object equalizing two maps $f,g: A \to B$ & $\{x \in A \mid f(x) = g(x)\}$ & $e : E \to A$ s.t.\ $f \circ e = g \circ e$ & Subset of equal values \\
+  		\hline
+  		\textbf{Coequalizer} & Quotient identifying $f(a) \sim g(a)$ for $f,g: A \to B$ & $B/{\sim}$ via $f \sim g$ & $q : B \to Q$ s.t.\ $q \circ f = q \circ g$ & Factor maps through $q$ \\
+  		\hline
+  		\textbf{Quotient (by relation)} & Canonical map $\pi : A \to A/{\sim}$ & Equiv.\ classes in $A/{\sim}$ & $f = \tilde{f} \circ \pi$ & Modulo in groups \\
+  		\hline
+  	\end{tabular}
+  \end{center}
+  
+  % --- Comprehensive Summary and Handbook: Aluffi pp. 2–39 ---
+  
+  \section*{Conceptual Index (pp. 2–39)}
+  
+  \begin{enumerate}
+  	\item \textbf{Sets and Functions (pp. 2–13)}
+  	\begin{itemize}
+  		\item Sets, elements, subsets
+  		\item Functions, injectivity, surjectivity, bijectivity
+  		\item Composition, identity, inverse functions
+  		\item Indexed sets and families
+  	\end{itemize}
+  	\item \textbf{Equivalence Relations and Partitions (pp. 13–16)}
+  	\begin{itemize}
+  		\item Relations and their graphs
+  		\item Reflexive, symmetric, transitive properties
+  		\item Equivalence classes and canonical quotient sets
+  	\end{itemize}
+  	\item \textbf{Compositions and Cancellations (pp. 16–20)}
+  	\begin{itemize}
+  		\item Composition of functions
+  		\item Left and right cancellation laws
+  		\item Isomorphisms
+  	\end{itemize}
+  	\item \textbf{Canonical Decomposition of a Function (pp. 20–23)}
+  	\begin{itemize}
+  		\item Image, fiber, and quotient structure
+  		\item Factorization through quotient and image
+  	\end{itemize}
+  	\item \textbf{Categories (pp. 23–29)}
+  	\begin{itemize}
+  		\item Objects and morphisms
+  		\item Identity morphisms, associativity
+  		\item Examples: Set, Grp, Vect, Top, Poset
+  	\end{itemize}
+  	\item \textbf{Isomorphisms in a Category (pp. 29–31)}
+  	\begin{itemize}
+  		\item Definition and diagrammatic conditions
+  		\item Inverses and uniqueness
+  	\end{itemize}
+  	\item \textbf{Universal Properties (pp. 31–39)}
+  	\begin{itemize}
+  		\item Initial and final objects
+  		\item Quotients and coequalizers
+  		\item Products and coproducts
+  	\end{itemize}
+  \end{enumerate}
+  
+  \section*{Illustrative Examples by Concept}
+  
+  \begin{itemize}
+  	\item \textbf{Injective/Surjective Function} — $f: \mathbb{N} \to \mathbb{Z},\ f(n) = n - 5$
+  	\item \textbf{Indexed Family} — $A_i = \{i, i+1\}$ for $i \in \mathbb{Z}$
+  	\item \textbf{Equivalence Relation} — $a \sim b$ iff $a \equiv b \mod 3$ on $\mathbb{Z}$
+  	\item \textbf{Quotient Set} — $\mathbb{Z}/\sim$ as $\mathbb{Z}_3$
+  	\item \textbf{Function Decomposition} — $f: \mathbb{Z} \to \mathbb{Z}_3$ via fibers and image
+  	\item \textbf{Category Example} — $\textbf{Set}$ with morphisms as functions
+  	\item \textbf{Isomorphism in $\textbf{Grp}$} — $\mathbb{Z} \cong \langle x \rangle \subset \mathbb{Q}^*$
+  	\item \textbf{Initial Object} — $\emptyset$ in \textbf{Set}
+  	\item \textbf{Final Object} — Singleton set in \textbf{Set}
+  	\item \textbf{Product} — $(a, b) \in A \times B$ with projections
+  	\item \textbf{Coproduct} — Tagged union: $(a, 0), (b, 1)$ from $A, B$
+  \end{itemize}
+  
+  \section*{Linked Exercises (One per Concept)}
+  
+  \begin{enumerate}
+  	\item \textbf{Functions:} Define $f: \mathbb{Z} \to \mathbb{Z}_n$ and check injectivity/surjectivity for various $n$
+  	\item \textbf{Partitions:} Given $S = \{1,2,3,4,5,6\}$ and $\sim$ by even/odd, construct $S/{\sim}$
+  	\item \textbf{Cancellations:} Show function composition fails to cancel when not injective/surjective
+  	\item \textbf{Decomposition:} Decompose $f(n) = n \mod 4$ into quotient $\pi$, map $\tilde{f}$ and inclusion
+  	\item \textbf{Category:} Describe morphisms in the poset $(\mathbb{Z}, \le)$ as a category
+  	\item \textbf{Isomorphism:} Show $\mathbb{Q}$ and $\mathbb{Z}[1/p]$ are not isomorphic groups
+  	\item \textbf{Initial Object:} Prove no initial object exists in $(\mathbb{Z}, \le)$
+  	\item \textbf{Quotient (Set):} Prove universal property holds for $\pi: \mathbb{Z} \to \mathbb{Z}_n$
+  	\item \textbf{Product:} Construct the product of $\mathbb{Z}_2$ and $\mathbb{Z}_3$ in \textbf{Set} and \textbf{Grp}
+  	\item \textbf{Coproduct:} Show that $\mathbb{Z} * \mathbb{Z}$ is not abelian using generators
+  \end{enumerate}
+  
+  \section*{Final Definitions and Formulae Handbook}
+  
+  \begin{itemize}
+  	\item \textbf{Function:} $f: A \to B$ assigns $f(a) \in B$ to each $a \in A$
+  	\item \textbf{Injective:} $f(a) = f(b) \Rightarrow a = b$
+  	\item \textbf{Surjective:} $\forall b \in B,\ \exists a \in A$ with $f(a) = b$
+  	\item \textbf{Bijective:} Injective and surjective
+  	\item \textbf{Equivalence Relation:} Reflexive, symmetric, transitive
+  	\item \textbf{Partition:} Disjoint union of equivalence classes
+  	\item \textbf{Isomorphism (Set):} A bijective function
+  	\item \textbf{Isomorphism (Category):} $f: A \to B$ with inverse $g$ such that $gf = 1_A$, $fg = 1_B$
+  	\item \textbf{Category:} Class of objects with morphisms, identity, and composition
+  	\item \textbf{Initial Object:} $\exists!$ morphism from it to any object
+  	\item \textbf{Final Object:} $\exists!$ morphism from any object to it
+  	\item \textbf{Product:} Object $P$ with projections $p_1, p_2$ and unique map from any $Z$
+  	\item \textbf{Coproduct:} Object $C$ with injections $i_1, i_2$ and unique map to any $Z$
+  	\item \textbf{Quotient (Set):} $A/{\sim} = \{ [a] \}$ with canonical projection $\pi$
+  	\item \textbf{Universal Property:} Unique morphism making diagram commute
+  \end{itemize}
+  
+  % --- Structural Foundations and ℝ Maps ---
+  
+  \subsection*{Structural Progression: From Elements to Categories}
+  
+  \begin{enumerate}
+  	\item \textbf{Elements:} The most primitive objects. Sets are defined solely by their elements.
+  	\item \textbf{Sets:} Collections of elements. Two sets are equal iff they have the same elements.
+  	\item \textbf{Empty Set \(\emptyset\):} The unique set with no elements. Subset of every set.
+  	\item \textbf{Subsets:} If \( A \subseteq B \), then every element of \( A \) is also in \( B \).
+  	\item \textbf{Relations:} Subsets of \( A \times B \), describing associations between elements of sets.
+  	\item \textbf{Functions:} Special relations assigning each element of the domain exactly one element in the codomain.
+  	\item \textbf{Objects and Morphisms:} Abstract structures in category theory. Morphisms generalize functions.
+  	\item \textbf{Categories:} Comprise objects and morphisms with identity and composition satisfying associativity.
+  \end{enumerate}
+  
+  \vspace{1em}
+  \subsection*{Relations, Functions, and Morphisms on \(\mathbb{R}\)}
+  
+  \begin{itemize}
+  	\item \textbf{Relation on \(\mathbb{R}\):} \\
+  	A relation \( R \) on \(\mathbb{R}\) is a subset of the Cartesian product:
+  	\[
+  	R \subseteq \mathbb{R} \times \mathbb{R}
+  	\]
+  	For example:
+  	\[
+  	R = \{ (x, y) \in \mathbb{R} \times \mathbb{R} \mid y = x^2 \}
+  	\]
+  	
+  	\item \textbf{Function \( f : \mathbb{R} \to \mathbb{R} \):} \\
+  	A function is a special type of relation where every input has exactly one output:
+  	\[
+  	\forall x \in \mathbb{R}, \, \exists! y \in \mathbb{R} \text{ such that } (x, y) \in f
+  	\]
+  	Examples:
+  	\[
+  	f(x) = x^2 + 1, \quad f(x) = \sin(x)
+  	\]
+  	
+  	\item \textbf{Self-map:} \\
+  	A function from a set to itself:
+  	\[
+  	f : \mathbb{R} \to \mathbb{R}
+  	\]
+  	is called a \emph{self-map} or \emph{endomorphism} in the category \textbf{Set}.
+  	
+  	\item \textbf{Morphism in \(\mathbf{Set}\):} \\
+  	In category theory, a morphism between two sets is defined as a function. \\
+  	So:
+  	\[
+  	\text{Morphism in } \mathbf{Set} = \text{Function between sets}
+  	\]
+  	Therefore, any function \( f: \mathbb{R} \to \mathbb{R} \) is:
+  	\begin{itemize}
+  		\item a relation (subset of \(\mathbb{R} \times \mathbb{R}\)),
+  		\item a function (with the functional property),
+  		\item a morphism in the category \(\mathbf{Set}\).
+  	\end{itemize}
+  \end{itemize}
+  
+  % --- Illustrative Example: Structural Progression in Aluffi Ch.1 ---
+  
+  \subsection*{Illustrative Example: From Elements to Categories}
+  
+  \textbf{Goal:} To illustrate the progression of foundational structures in Aluffi's Chapter 1 using a concrete example based on the real numbers.
+  
+  \begin{enumerate}
+  	\item \textbf{Elements:} \\
+  	Consider the real numbers \( 2, 3, \pi \in \mathbb{R} \). These are atomic elements—our most basic objects.
+  	
+  	\item \textbf{Sets:} \\
+  	Define a set \( A = \{2, 3, \pi\} \). The set is uniquely determined by its elements. \\
+  	Also consider \( B = \mathbb{R} \), the set of all real numbers.
+  	
+  	\item \textbf{Subsets and the Empty Set:} \\
+  	\( A \subseteq B \), since every element of \( A \) is a real number. \\
+  	The empty set \( \emptyset \) is also a subset of \( B \), and of every set.
+  	
+  	\item \textbf{Cartesian Product and Relation:} \\
+  	Define the Cartesian product:
+  	\[
+  	A \times B = \{ (a, b) \mid a \in A, b \in B \}
+  	\]
+  	A relation \( R \subseteq A \times B \) could be:
+  	\[
+  	R = \{ (2, 4), (3, 9), (\pi, \pi^2) \}
+  	\]
+  	This relation associates each \( a \in A \) to its square in \( B \).
+  	
+  	\item \textbf{Function:} \\
+  	The above relation \( R \) is actually a \emph{function}:
+  	\[
+  	f : A \to B, \quad f(x) = x^2
+  	\]
+  	This satisfies the rule: each \( x \in A \) maps to exactly one \( f(x) \in B \).
+  	
+  	\item \textbf{Equivalence Relation (Optional Insert):} \\
+  	Define \( x \sim y \) on \( \mathbb{R} \) if \( x - y \in \mathbb{Z} \). \\
+  	This is an equivalence relation: reflexive, symmetric, and transitive. \\
+  	It partitions \( \mathbb{R} \) into equivalence classes modulo integers.
+  	
+  	\item \textbf{Category \textbf{Set}:} \\
+  	Now step up to the category-theoretic view:
+  	\begin{itemize}
+  		\item Objects: Sets like \( A \), \( B \), \( \mathbb{R} \)
+  		\item Morphisms: Functions like \( f : A \to B \)
+  	\end{itemize}
+  	In this category, we can compose morphisms:
+  	\[
+  	f : A \to B, \quad g : B \to C \quad \Rightarrow \quad g \circ f : A \to C
+  	\]
+  	And every object has an identity morphism \( \text{id}_A : A \to A \).
+  	
+  	\item \textbf{Diagrammatic View (Commutativity):} \\
+  	If we define another function \( g : B \to \mathbb{R} \) such that \( g(y) = y + 1 \), then:
+  	\[
+  	g \circ f(x) = f(x) + 1 = x^2 + 1
+  	\]
+  	So:
+  	\[
+  	x \xrightarrow{f} x^2 \xrightarrow{g} x^2 + 1
+  	\quad \Rightarrow \quad
+  	x \xrightarrow{g \circ f} x^2 + 1
+  	\]
+  	This composition illustrates morphism chaining in \textbf{Set}.
+  \end{enumerate}
+  
+  % --- Illustrative Example: Structural Progression in Aluffi Ch.1 ---
+  
+  \subsection*{Illustrative Example: From Elements to Categories}
+  
+  \textbf{Goal:} To illustrate the progression of foundational structures in Aluffi's Chapter 1 using a concrete example based on the real numbers.
+  
+  \begin{enumerate}
+  	\item \textbf{Elements:} \\
+  	Consider the real numbers \( 2, 3, \pi \in \mathbb{R} \). These are atomic elements—our most basic objects.
+  	
+  	\item \textbf{Sets:} \\
+  	Define a set \( A = \{2, 3, \pi\} \). The set is uniquely determined by its elements. \\
+  	Also consider \( B = \mathbb{R} \), the set of all real numbers.
+  	
+  	\item \textbf{Subsets and the Empty Set:} \\
+  	\( A \subseteq B \), since every element of \( A \) is a real number. \\
+  	The empty set \( \emptyset \) is also a subset of \( B \), and of every set.
+  	
+  	\item \textbf{Cartesian Product and Relation:} \\
+  	Define the Cartesian product:
+  	\[
+  	A \times B = \{ (a, b) \mid a \in A, b \in B \}
+  	\]
+  	A relation \( R \subseteq A \times B \) could be:
+  	\[
+  	R = \{ (2, 4), (3, 9), (\pi, \pi^2) \}
+  	\]
+  	This relation associates each \( a \in A \) to its square in \( B \).
+  	
+  	\item \textbf{Function:} \\
+  	The above relation \( R \) is actually a \emph{function}:
+  	\[
+  	f : A \to B, \quad f(x) = x^2
+  	\]
+  	This satisfies the rule: each \( x \in A \) maps to exactly one \( f(x) \in B \).
+  	
+  	\item \textbf{Equivalence Relation:} \\
+  	Define the relation \( x \sim y \) on \( \mathbb{R} \) by:
+  	\[
+  	x \sim y \iff x - y \in \mathbb{Z}
+  	\]
+  	This is an equivalence relation because:
+  	\begin{itemize}
+  		\item \textbf{Reflexive:} \( x - x = 0 \in \mathbb{Z} \Rightarrow x \sim x \)
+  		\item \textbf{Symmetric:} If \( x \sim y \), then \( x - y \in \mathbb{Z} \Rightarrow y - x \in \mathbb{Z} \Rightarrow y \sim x \)
+  		\item \textbf{Transitive:} If \( x \sim y \) and \( y \sim z \), then \( x - y \in \mathbb{Z} \) and \( y - z \in \mathbb{Z} \Rightarrow x - z = (x - y) + (y - z) \in \mathbb{Z} \Rightarrow x \sim z \)
+  	\end{itemize}
+  	This relation partitions \( \mathbb{R} \) into equivalence classes modulo \( \mathbb{Z} \):
+  	\[
+  	[x]_\sim = \{ y \in \mathbb{R} \mid y - x \in \mathbb{Z} \} = x + \mathbb{Z}
+  	\]
+  	For example:
+  	\[
+  	[\pi] = \{ \pi + n \mid n \in \mathbb{Z} \}
+  	\]
+  	
+  	\item \textbf{Category \textbf{Set}:} \\
+  	Now step up to the category-theoretic view:
+  	\begin{itemize}
+  		\item Objects: Sets like \( A \), \( B \), \( \mathbb{R} \)
+  		\item Morphisms: Functions like \( f : A \to B \)
+  	\end{itemize}
+  	In this category, we can compose morphisms:
+  	\[
+  	f : A \to B, \quad g : B \to C \quad \Rightarrow \quad g \circ f : A \to C
+  	\]
+  	And every object has an identity morphism \( \text{id}_A : A \to A \).
+  	
+  	\item \textbf{Diagrammatic View (Commutativity):} \\
+  	If we define another function \( g : B \to \mathbb{R} \) such that \( g(y) = y + 1 \), then:
+  	\[
+  	g \circ f(x) = f(x) + 1 = x^2 + 1
+  	\]
+  	So:
+  	\[
+  	x \xrightarrow{f} x^2 \xrightarrow{g} x^2 + 1
+  	\quad \Rightarrow \quad
+  	x \xrightarrow{g \circ f} x^2 + 1
+  	\]
+  	This composition illustrates morphism chaining in \textbf{Set}.
+  \end{enumerate}
+  
+  % --- Illustrative Example: Structural Progression in Aluffi Ch.1 (Homogeneous: Mod 3) ---
+  
+  \subsection*{Illustrative Example: From Elements to Categories (Modulo 3)}
+  
+  \textbf{Goal:} To illustrate the progression of foundational structures in Aluffi's Chapter 1 using a coherent example: arithmetic modulo 3.
+  
+  \begin{enumerate}
+  	\item \textbf{Elements:} \\
+  	Consider the integers \( 0, 1, 2, 3, 4 \in \mathbb{Z} \). These are atomic elements.
+  	
+  	\item \textbf{Sets:} \\
+  	Define the set \( A = \{0, 1, 2, 3, 4\} \subseteq \mathbb{Z} \), a finite subset of the integers.
+  	
+  	\item \textbf{Subsets and the Empty Set:} \\
+  	\( A \subseteq \mathbb{Z} \), and the empty set \( \emptyset \) is a subset of all sets.
+  	
+  	\item \textbf{Cartesian Product and Relation:} \\
+  	Define a relation \( R \subseteq A \times A \) by:
+  	\[
+  	x \sim y \iff x \equiv y \pmod{3}
+  	\]
+  	This relation includes pairs like:
+  	\[
+  	(0, 3), (1, 4), (2, 2), (3, 0), (4, 1)
+  	\]
+  	and reflects equality modulo 3.
+  	
+  	\item \textbf{Function:} \\
+  	Define the function:
+  	\[
+  	f : A \to \{0, 1, 2\}, \quad f(x) = x \bmod 3
+  	\]
+  	This function maps each element of \( A \) to its equivalence class representative mod 3:
+  	\[
+  	f(0) = 0,\ f(1) = 1,\ f(2) = 2,\ f(3) = 0,\ f(4) = 1
+  	\]
+  	
+  	\item \textbf{Equivalence Relation:} \\
+  	The relation \( x \sim y \iff x \equiv y \pmod{3} \) satisfies:
+  	\begin{itemize}
+  		\item \textbf{Reflexivity:} \( x - x = 0 \in 3\mathbb{Z} \Rightarrow x \sim x \)
+  		\item \textbf{Symmetry:} If \( x \sim y \), then \( y \sim x \)
+  		\item \textbf{Transitivity:} If \( x \sim y \) and \( y \sim z \), then \( x \sim z \)
+  	\end{itemize}
+  	The equivalence classes are:
+  	\[
+  	[0] = \{0, 3\}, \quad [1] = \{1, 4\}, \quad [2] = \{2\}
+  	\]
+  	
+  	\item \textbf{Category \textbf{Set}:} \\
+  	In the category-theoretic view:
+  	\begin{itemize}
+  		\item Objects: Sets like \( A \), \( \{0,1,2\} \)
+  		\item Morphism: \( f : A \to \{0,1,2\} \) as defined above
+  	\end{itemize}
+  	Morphism composition and identity apply as standard.
+  	
+  	\item \textbf{Diagrammatic View (Commutativity):} \\
+  	Define another function:
+  	\[
+  	g : \{0,1,2\} \to \mathbb{Z}, \quad g(k) = 3k
+  	\]
+  	Then \( g \circ f : A \to \mathbb{Z} \) maps:
+  	\[
+  	x \mapsto 3 \cdot (x \bmod 3)
+  	\]
+  	For example:
+  	\[
+  	g(f(4)) = g(1) = 3, \quad g(f(3)) = g(0) = 0
+  	\]
+  	Diagrammatically:
+  	\[
+  	x \xrightarrow{f} x \bmod 3 \xrightarrow{g} 3(x \bmod 3) = g(f(x))
+  	\]
+  	illustrates morphism chaining in \textbf{Set}.
+  \end{enumerate}
+  \section*{Disjunctive Syllogism and Logical Validity}
+  
+  \textbf{Definition (Disjunctive Syllogism):}  
+  A disjunctive syllogism is a valid form of argument in propositional logic with the following structure:
+  \[
+  P \lor Q,\quad \lnot Q \quad \vdash \quad P
+  \]
+  This states that if ``$P$ or $Q$'' is true and $Q$ is false, then $P$ must be true. It is a truth-preserving inference rule.
+  
+  \textbf{Example:}  
+  \begin{itemize}
+  	\item Premise 1: It is raining or snowing.
+  	\item Premise 2: It is not snowing.
+  	\item Conclusion: Therefore, it is raining.
+  \end{itemize}
+  Symbolically:
+  \[
+  R \lor S,\quad \lnot S \quad \vdash \quad R
+  \]
+  
+  \section*{Full Breakdown of Example Argument}
+  
+  \subsection*{1. Natural Language Argument}
+  \begin{itemize}
+  	\item Premise 1: I will go to work either tomorrow or today.
+  	\item Premise 2: I will stay home today.
+  	\item Conclusion: Therefore, I will go to work tomorrow.
+  \end{itemize}
+  
+  \subsection*{2. Symbolic Translation}
+  Let:
+  \begin{itemize}
+  	\item $W_t$: I will go to work tomorrow
+  	\item $W_d$: I will go to work today
+  \end{itemize}
+  
+  Then the argument becomes:
+  \[
+  W_t \lor W_d,\quad \lnot W_d \quad \vdash \quad W_t
+  \]
+  
+  \subsection*{3. Truth Table Analysis}
+  
+  \begin{center}
+  	\begin{tabular}{|c|c|c|c|c|c|c|}
+  		\hline
+  		$W_t$ & $W_d$ & $W_t \lor W_d$ & $\lnot W_d$ & Conclusion $W_t$ & Premises True? & Conclusion True? \\
+  		\hline
+  		T & T & T & F & T & No & Yes \\
+  		T & F & T & T & T & Yes & Yes \\
+  		F & T & T & F & F & No & No \\
+  		F & F & F & T & F & No & No \\
+  		\hline
+  	\end{tabular}
+  \end{center}
+  
+  \textbf{Observation:}  
+  Only row 2 has both premises true. In that row, the conclusion is also true.  
+  Therefore, the argument is \textbf{valid}: the conclusion is true whenever all premises are true.
+  
+  \subsection*{4. Classification}
+  
+  This is a classic case of disjunctive syllogism:
+  \[
+  W_t \lor W_d,\quad \lnot W_d \quad \vdash \quad W_t
+  \]
+  We eliminate $W_d$ (work today), so $W_t$ (work tomorrow) must be true.
+  
+  \subsection*{5. English-to-Logic Translation Table}
+  
+  \begin{center}
+  	\begin{tabular}{|l|l|l|}
+  		\hline
+  		\textbf{Natural Language} & \textbf{Symbolic Logic} & \textbf{Explanation} \\
+  		\hline
+  		``Either A or B'' & $A \lor B$ & Inclusive OR \\
+  		``Not A'' & $\lnot A$ & Negation \\
+  		``If A, then B'' & $A \rightarrow B$ & Implication \\
+  		``A and B'' & $A \land B$ & Conjunction (both true) \\
+  		``A is true'' & $A$ & Basic assertion \\
+  		``Therefore'' & $\vdash$ & Conclusion follows from premises \\
+  		\hline
+  	\end{tabular}
+  \end{center}
+  
+  \section*{Valid Inference Forms (Syllogisms) for Aluffi Chapter 1}
+  
+  To understand and construct valid proofs in Chapter 1 of Aluffi's book, it is essential to master the following valid inference rules (syllogisms). These rules allow us to reason soundly from given premises to conclusions using symbolic logic.
+  
+  \subsection*{1. Modus Ponens (Affirming the Antecedent)}
+  
+  \textbf{Form:}
+  \[
+  P \rightarrow Q,\quad P \quad \vdash \quad Q
+  \]
+  
+  \textbf{Explanation:}  
+  If we know that $P$ implies $Q$, and we are told that $P$ is true, then we can conclude that $Q$ is true.
+  
+  \textbf{Non-Mathematical Example:}
+  \begin{itemize}
+  	\item Premise 1: If it rains, then the ground will be wet. ($R \rightarrow W$)
+  	\item Premise 2: It rains. ($R$)
+  	\item Conclusion: The ground will be wet. ($W$)
+  \end{itemize}
+  
+  \textbf{Mathematical Example (Aluffi-style):}
+  \begin{itemize}
+  	\item Premise 1: If a map is bijective, then it has an inverse. ($B \rightarrow I$)
+  	\item Premise 2: The map $f$ is bijective. ($B$)
+  	\item Conclusion: The map $f$ has an inverse. ($I$)
+  \end{itemize}
+  
+  \textbf{Reasoning:}  
+  Since the implication is known and the condition is satisfied, we may assert the conclusion.
+  
+  \subsection*{2. Modus Tollens (Denying the Consequent)}
+  
+  \textbf{Form:}
+  \[
+  P \rightarrow Q,\quad \lnot Q \quad \vdash \quad \lnot P
+  \]
+  
+  \textbf{Explanation:}  
+  If $P$ implies $Q$, and $Q$ is false, then $P$ must also be false.
+  
+  \textbf{Non-Mathematical Example:}
+  \begin{itemize}
+  	\item Premise 1: If the light is on, then the room is bright. ($L \rightarrow B$)
+  	\item Premise 2: The room is not bright. ($\lnot B$)
+  	\item Conclusion: The light is not on. ($\lnot L$)
+  \end{itemize}
+  
+  \textbf{Mathematical Example:}
+  \begin{itemize}
+  	\item Premise 1: If a function is injective, then its kernel is trivial. ($I \rightarrow K$)
+  	\item Premise 2: The kernel is not trivial. ($\lnot K$)
+  	\item Conclusion: The function is not injective. ($\lnot I$)
+  \end{itemize}
+  
+  \textbf{Reasoning:}  
+  We negate the conclusion of the implication and thereby deny the initial condition.
+  
+  \subsection*{3. Disjunctive Syllogism}
+  
+  \textbf{Form:}
+  \[
+  P \lor Q,\quad \lnot P \quad \vdash \quad Q
+  \]
+  
+  \textbf{Explanation:}  
+  If at least one of $P$ or $Q$ is true, and we know $P$ is false, then $Q$ must be true.
+  
+  \textbf{Non-Mathematical Example:}
+  \begin{itemize}
+  	\item Premise 1: I will eat pizza or pasta. ($P \lor T$)
+  	\item Premise 2: I won’t eat pizza. ($\lnot P$)
+  	\item Conclusion: I will eat pasta. ($T$)
+  \end{itemize}
+  
+  \textbf{Mathematical Example (your original):}
+  \begin{itemize}
+  	\item Premise 1: I will go to work tomorrow or today. ($W_t \lor W_d$)
+  	\item Premise 2: I will not go to work today. ($\lnot W_d$)
+  	\item Conclusion: I will go to work tomorrow. ($W_t$)
+  \end{itemize}
+  
+  \textbf{Reasoning:}  
+  If one option is eliminated, the other must be true if the disjunction is true.
+  
+  \subsection*{4. Hypothetical Syllogism}
+  
+  \textbf{Form:}
+  \[
+  P \rightarrow Q,\quad Q \rightarrow R \quad \vdash \quad P \rightarrow R
+  \]
+  
+  \textbf{Explanation:}  
+  If $P$ leads to $Q$ and $Q$ leads to $R$, then $P$ also leads to $R$.
+  
+  \textbf{Non-Mathematical Example:}
+  \begin{itemize}
+  	\item Premise 1: If I study, then I will pass. ($S \rightarrow P$)
+  	\item Premise 2: If I pass, then I will graduate. ($P \rightarrow G$)
+  	\item Conclusion: If I study, then I will graduate. ($S \rightarrow G$)
+  \end{itemize}
+  
+  \textbf{Mathematical Example:}
+  \begin{itemize}
+  	\item Premise 1: If a function is a group homomorphism, then it preserves identity. ($H \rightarrow E$)
+  	\item Premise 2: If a function preserves identity, then it maps the identity of $G$ to the identity of $H$. ($E \rightarrow M$)
+  	\item Conclusion: If a function is a homomorphism, then it maps identity correctly. ($H \rightarrow M$)
+  \end{itemize}
+  
+  \textbf{Reasoning:}  
+  Implications can be chained to reach a compound conclusion.
+  
+  \subsection*{Conclusion}
+  
+  These four valid inference patterns form the core reasoning tools for proof-writing and diagram chasing in abstract algebra. All are truth-preserving and appear implicitly or explicitly throughout Chapter 1 of Aluffi’s book.
+  
+  \section*{Logic Inference Strategy for Proofs (Aluffi Chapter 1)}
+  
+  \subsection*{Core Valid Inference Forms}
+  
+  \begin{itemize}
+  	\item \textbf{Modus Ponens}:\quad $P \rightarrow Q,\; P \vdash Q$
+  	\item \textbf{Modus Tollens}:\quad $P \rightarrow Q,\; \lnot Q \vdash \lnot P$
+  	\item \textbf{Disjunctive Syllogism}:\quad $P \lor Q,\; \lnot P \vdash Q$
+  	\item \textbf{Hypothetical Syllogism}:\quad $P \rightarrow Q,\; Q \rightarrow R \vdash P \rightarrow R$
+  \end{itemize}
+  
+  These rules are all \textbf{truth-preserving} and are frequently used (explicitly or implicitly) in mathematical proofs and algebraic reasoning.
+  
+  \subsection*{Best Practice for Evaluating Arguments}
+  
+  \textbf{Step 1: Translate to Symbolic Logic}  
+  Express each premise and the conclusion using symbolic notation.  
+  Example: “If it rains, the ground is wet” becomes $R \rightarrow W$.
+  
+  \textbf{Step 2: Identify Inference Type}  
+  Check if the argument matches one of the core valid inference forms.  
+  If it does, declare the argument \textbf{valid} without further testing.
+  
+  \textbf{Step 3: If No Matching Form, Use a Truth Table}  
+  If the structure does not match a known form:
+  \begin{itemize}
+  	\item Build a full truth table listing all possible combinations of truth values.
+  	\item Check for any row where \textbf{all premises are true} but the \textbf{conclusion is false}.
+  	\item If such a row exists: the argument is \textbf{invalid}.
+  	\item If no such row exists: the argument is \textbf{valid}.
+  \end{itemize}
+  
+  \subsection*{When to Use Each Tool}
+  
+  \begin{tabular}{|l|p{10cm}|}
+  	\hline
+  	\textbf{Tool} & \textbf{Use When} \\
+  	\hline
+  	Recognizing a Syllogism & The structure clearly fits a valid rule (e.g., Modus Ponens). Fast and efficient. \\
+  	\hline
+  	Truth Table & The argument is not obviously valid or doesn't match a known inference rule. Used to verify or disprove validity by checking all possibilities. \\
+  	\hline
+  \end{tabular}
+  
+  \subsection*{Conclusion}
+  
+  For Chapter 1 of Aluffi’s Algebra: Chapter 0, you should aim to recognize and apply valid inference rules fluently. Truth tables are useful as backup verification but not always needed in mathematical writing.
+  
+  \section*{Truth Table Template for 3 Variables}
+  
+  Let the propositional variables be:
+  \begin{itemize}
+  	\item $A$, $B$, $C$
+  \end{itemize}
+  
+  Total number of rows: $2^3 = 8$
+  
+  \begin{center}
+  	\begin{tabular}{|c|c|c|}
+  		\hline
+  		$A$ & $B$ & $C$ \\
+  		\hline
+  		T & T & T \\
+  		T & T & F \\
+  		T & F & T \\
+  		T & F & F \\
+  		F & T & T \\
+  		F & T & F \\
+  		F & F & T \\
+  		F & F & F \\
+  		\hline
+  	\end{tabular}
+  \end{center}
+  
+  \subsection*{Alternation Rule}
+  
+  \begin{itemize}
+  	\item First column ($A$): alternate every $2^{3-1} = 4$ rows
+  	\item Second column ($B$): alternate every $2^{3-2} = 2$ rows
+  	\item Third column ($C$): alternate every $2^{3-3} = 1$ row
+  \end{itemize}
+  
+  This structure ensures all $2^3 = 8$ combinations of truth values are represented without repetition or omission.
+  
+  \section*{Vacuous Truth – Logical Perspective}
+  
+  \subsection*{1. Logical Form and Truth Table}
+  
+  Let $P \rightarrow Q$ denote the implication: “If $P$, then $Q$”.
+  
+  This statement is defined to be \textbf{false only} when $P$ is \textbf{true} and $Q$ is \textbf{false}. In all other cases, it is \textbf{true}:
+  
+  \begin{center}
+  	\begin{tabular}{|c|c|c|}
+  		\hline
+  		$P$ & $Q$ & $P \rightarrow Q$ \\
+  		\hline
+  		T & T & T \\
+  		T & F & \textbf{F} \\ % Only false case
+  		F & T & T \\
+  		F & F & T \\
+  		\hline
+  	\end{tabular}
+  \end{center}
+  
+  \subsection*{2. Logical Justification: Failure to Falsify}
+  
+  The meaning of $P \rightarrow Q$ is:
+  \begin{quote}
+  	“I guarantee: \textit{every time} $P$ occurs, $Q$ will follow.”
+  \end{quote}
+  
+  To \textbf{falsify} this implication, we must exhibit a specific case where:
+  \begin{itemize}
+  	\item $P$ is true (the condition is met),
+  	\item but $Q$ is false (the promised result fails).
+  \end{itemize}
+  
+  If $P$ is never true, then \textbf{no such counterexample can exist}. Therefore, we cannot disprove the implication.
+  
+  \textbf{Conclusion:}  
+  In the absence of a counterexample, $P \rightarrow Q$ is considered \textbf{logically true}. This is called a \textbf{vacuous truth}.
+  
+  \subsection*{3. Illustrative Analogy: Rule with No Application}
+  
+  Consider the following statement made by a teacher:
+  \begin{quote}
+  	“If a student gets an A on the final exam, they will receive a recommendation letter.”
+  \end{quote}
+  
+  Now suppose \textbf{no student} gets an A.
+  
+  \begin{itemize}
+  	\item Did the teacher break their promise? $\Rightarrow$ \textbf{No}.
+  	\item The condition ($P$ = "student gets an A") never occurred.
+  	\item The consequence ($Q$ = "student gets a letter") was never required.
+  \end{itemize}
+  
+  \textbf{Interpretation:}  
+  The rule was logically kept — not because it was fulfilled, but because it was \textit{never tested}. There was \textbf{no violation}, so the implication is accepted as \textbf{true}.
+  
+  \subsection*{4. Summary}
+  
+  \begin{itemize}
+  	\item $P \rightarrow Q$ is true when no counterexample exists.
+  	\item If $P$ is false, then the implication survives — not by confirmation, but by default.
+  	\item This is not a flaw — it is a feature of logic that ensures consistency in deduction, quantification, and proof structure.
+  \end{itemize}
+  
+  
+\end{document}
