@@ -49,7 +49,8 @@
                        home-manager.useGlobalPkgs = true;
                        home-manager.useUserPackages = true;               
                        home-manager.users.nixos_u0 = import ./home/users/nixos_u0.nix;
-                       
+                      # This enables automatic backup of conflicting files
+    home-manager.backupFileExtension = "backup";
                     } 
                     
                  ];

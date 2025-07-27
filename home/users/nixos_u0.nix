@@ -21,11 +21,20 @@
     ghostty
     texlive.combined.scheme-full
     tectonic
-    zathura
     obsidian
-    texstudio
+    pdf2svg
     libreoffice
-
+    vscode
+    sage
+    pandoc
+    quarto
+    (python3.withPackages (ps: with ps; [
+      manim
+      numpy
+      scipy
+      pillow
+    ]))
+    ffmpeg
    ];
      
  

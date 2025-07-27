@@ -9,6 +9,7 @@ programs.bash = {
      cleanh = "nix-collect-garbage -d";
      cleang = "sudo nix-collect-garbage -d";
      ld = "cd $HOME/dotfiles";
+     sege = "$HOME/bin/sege.sh";
    };
   };
   
