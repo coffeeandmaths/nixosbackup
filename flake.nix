@@ -10,54 +10,32 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, self, nvf, ... }:
+  outputs = { nixpkgs, home-manager, self, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       lib = nixpkgs.lib;
     in {
-
-  # --- Added: Python dev shell with JupyterLab ---
-  devShells.x86_64-linux.python-ui = pkgs.mkShell {
-    name = "python-ui";
-      buildInputs = [
-        pkgs.python3
-        pkgs.python3Packages.jupyterlab
-        
-    ];
-
-    shellHook = ''
-      echo "🚀 Run: jupyter-lab"
-      echo "🌐 Then open the link in your browser."
-      echo "📝 nvf is available: try running 'nvf --help'"
-    '';
-  };
-  # --- End added section ---
-
-        #-----------------NIXOS-------------------
-          nixosConfigurations = {
-
-             "nixos" = lib.nixosSystem {  
-                 inherit system;
-                 modules = [
-                    ./configuration.nix
-                    #-----HOME MANAGER MODULES----------------
-                    home-manager.nixosModules.home-manager
-
-
-                    {
-                       home-manager.useGlobalPkgs = true;
-                       home-manager.useUserPackages = true;               
-                       home-manager.users.nixos_u0 = import ./home/users/nixos_u0.nix;
-                       # This enables automatic backup of conflicting files
-                       home-manager.backupFileExtension = "backup";
-                    } 
-                    
-                 ];
-                };
-            };
-          };  
-       }
+    #-----------------NIXOS-------------------
+    nixosConfigurations = {
+      "nixos" = lib.nixosSystem {
+       inherit system;
+       modules = [
+            ./configuration.nix
+            #-----HOME MANAGER MODULES----------------
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.nixos_u0 = import ./home/users/nixos_u0.nix;
+              # This enables automatic backup of conflicting files
+              home-manager.backupFileExtension = "backup";
+             }
+             ];
+           };
+          };
+        };
+      }
 
 #-------------HOME MANAGER STANDALONE-------------------------       
 

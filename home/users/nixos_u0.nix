@@ -8,10 +8,12 @@
   imports = [
 
 #    ../modules/starship.nix
-    ../modules/bash.nix
-    ../modules/bash.nix
-    ../modules/git.nix
-    ../modules/vim.nix
+     ../modules/bash.nix
+     ../modules/bash.nix
+     ../modules/git.nix
+
+
+
       
   ];
   home.packages = with pkgs; [
@@ -24,6 +26,7 @@
     obsidian
     pdf2svg
     libreoffice
+    texstudio
     vscode
     sage
     pandoc
