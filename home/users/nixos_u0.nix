@@ -9,7 +9,6 @@
 
 #    ../modules/starship.nix
      ../modules/bash.nix
-     ../modules/bash.nix
      ../modules/git.nix
 
 
@@ -21,23 +20,20 @@
     powerline-fonts
     firefox
     ghostty
-    texlive.combined.scheme-full
-    tectonic
     obsidian
     pdf2svg
     libreoffice
-    texstudio
-    vscode
-    sage
+#    vscode
+#    sage
     pandoc
-    quarto
-    (python3.withPackages (ps: with ps; [
-      manim
-      numpy
-      scipy
-      pillow
-    ]))
-    ffmpeg
+#    quarto
+#    (python3.withPackages (ps: with ps; [
+#      manim
+#      numpy
+#      scipy
+#      pillow
+#    ]))
+#    ffmpeg
    ];
      
  

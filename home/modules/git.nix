@@ -1,13 +1,13 @@
-{congig,pkgs, ...}:
+{config,pkgs, ...}:
 {
   #-----------------GIT--------------------------
   programs.git = {
     enable = true;
-    userName = "nixos_u0";
-    userEmail = "mail@nixos.com";
+    userName = "cofeeandmaths";
+    userEmail = "nixos_u0@nixos.com";
     extraConfig = {
       init.defaultBranch = "main";
-      safe.directory = "$HOME/nixos_u0/dotfiles";
+      safe.directory = "$HOME/nixos_u0/.dotfiles";
     };
   };
 }

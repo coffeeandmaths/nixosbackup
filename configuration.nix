@@ -17,6 +17,13 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
+  swapDevices = [{ device = "/swapfile"; size = 8192; } ];
+  nix.settings = {
+    max-jobs = 1;
+    cores = 0;
+  };
+
+
 
   
   # Set your time zone.
@@ -70,7 +77,42 @@
     wget
     git
     home-manager  
+    catppuccin-sddm
+    (texlive.combine {
+      inherit (texlive)
+        # Base + LaTeX
+        scheme-medium
+        collection-latexrecommended
+        collection-latexextra
+
+        # Maths + science
+        collection-mathscience     # amsmath, mathtools, amsthm, siu>
+        collection-bibtexextra     # biblatex/biber styles, etc.
+        collection-fontsrecommended
+
+        # Tools I actually want available:
+        latexmk
+        pgfplots
+        tikz-cd
+        standalone
+        xcolor
+        etoolbox
+        cleveref
+        csquotes
+        l3packages l3kernel;  # LaTeX3 core (many packages depend on>
+    })
     ];
+
+    # Needed for unlocking KWallet automatically on login
+     security.pam.services.sddm.enableKwallet = true;
+
+    fonts.packages = with pkgs; [
+    dejavu_fonts    # clean sans/serif
+    liberation_ttf  # LibreOffice-friendly serif/sans/mono
+    jetbrains-mono # optional, if you want for math/code in docs
+    gyre-fonts
+  ];
+
 
    #  Wide settings
    # Enable CUPS printing
