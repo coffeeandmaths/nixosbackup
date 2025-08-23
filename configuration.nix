@@ -5,9 +5,8 @@
     [ # Include the results of the hardware scan.
       ./modules/hardware-configuration.nix
       ./modules/plasma.nix
-     # ./modules/gnome-prune.nix
-     # ./modules/gnome.nix
       ./modules/networking.nix
+      ./modules/printer.nix
     ];
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
@@ -112,30 +111,6 @@
     jetbrains-mono # optional, if you want for math/code in docs
     gyre-fonts
   ];
-
-
-   #  Wide settings
-   # Enable CUPS printing
-     services.printing.enable = true;
-
-   # Use HPLIP with the plugin for HP support (e.g., scanning or proprietary features)
-     services.printing.drivers = [ pkgs.hplipWithPlugin ];
-     services.printing.browsing = true;
-     services.printing.defaultShared = true;
-     # Optional but recommended
-     hardware.printers.ensurePrinters = [];
-   # Enable scanner support
-     hardware.sane.enable = true;
-
-   # Allow network printer discovery via mDNS/Avahi
-     services.avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-     };
-
-   # Allow the CUPS web interface through the firewall
-     networking.firewall.allowedTCPPorts = [ 631 ];
 
 
     nixpkgs.config.allowUnfree = true;
