@@ -12,6 +12,8 @@
 
     services.displayManager.sddm.wayland.enable = true;
     services.desktopManager.plasma6.enable = true;
+    # Needed for unlocking KWallet automatically on login
+    security.pam.services.sddm.enableKwallet = true;
 
   
   environment.plasma6.excludePackages = with pkgs.kdePackages; [

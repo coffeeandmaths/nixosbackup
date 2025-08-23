@@ -8,6 +8,7 @@
       ./modules/networking.nix
       ./modules/printer.nix
       ./modules/programs.nix
+      ./modules/audio.nix
     ];
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
@@ -53,15 +54,7 @@
   console.keyMap = "uk";
 
   
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+
 
   # User account
   users.users.nixos_u0 = {
@@ -74,10 +67,8 @@
   };
 
 
-    # Needed for unlocking KWallet automatically on login
-     security.pam.services.sddm.enableKwallet = true;
 
-        system.stateVersion = "25.05"; # Did you read the comment?
+    system.stateVersion = "25.05"; # Did you read the comment?
   
     environment.shells = with pkgs; [ bash ];
   
