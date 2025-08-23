@@ -11,10 +11,8 @@
       ./modules/audio.nix
       ./modules/locales.nix
     ];
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
- 
-     
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
@@ -25,30 +23,17 @@
     cores = 0;
   };
 
-
-
-  
-
-
-  
-
-
   # User account
   users.users.nixos_u0 = {
     isNormalUser = true;
     description = "Ramon Armeria";
     extraGroups = [ "networkmanager" "wheel" "lp" "lpadmin"];
     packages = with pkgs; [
-       
     ];
   };
 
-
-
-    system.stateVersion = "25.05"; # Did you read the comment?
-  
-    environment.shells = with pkgs; [ bash ];
-  
-    users.defaultUserShell = pkgs.bash;
+  system.stateVersion = "25.05"; # Did you read the comment?
+  environment.shells = with pkgs; [ bash ];
+  users.defaultUserShell = pkgs.bash;
 
   }

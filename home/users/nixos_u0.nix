@@ -23,17 +23,17 @@
     obsidian
     pdf2svg
     libreoffice
-#    vscode
+    vscode
 #    sage
     pandoc
-#    quarto
-#    (python3.withPackages (ps: with ps; [
-#      manim
-#      numpy
-#      scipy
-#      pillow
-#    ]))
-#    ffmpeg
+    quarto
+    (python3.withPackages (ps: with ps; [
+      manim
+      numpy
+      scipy
+      pillow
+    ]))
+    ffmpeg
    ];
      
  
