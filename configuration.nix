@@ -11,6 +11,7 @@
       ./modules/audio.nix
       ./modules/locales.nix
     ];
+  system.stateVersion = "25.05";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
@@ -32,7 +33,6 @@
     ];
   };
 
-  system.stateVersion = "25.05"; # Did you read the comment?
   environment.shells = with pkgs; [ bash ];
   users.defaultUserShell = pkgs.bash;
 

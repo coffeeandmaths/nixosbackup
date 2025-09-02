@@ -24,7 +24,8 @@
     pdf2svg
     libreoffice
     vscode
-#    sage
+    texstudio
+    sage
     pandoc
     quarto
     (python3.withPackages (ps: with ps; [
@@ -34,6 +35,7 @@
       pillow
     ]))
     ffmpeg
+    vlc
    ];
      
  
