@@ -6,7 +6,7 @@
     services.xserver.enable = true;
     # Enable the KDE Plasma Desktop Environment.
     services.displayManager.sddm.enable = true;
-    services.displayManager.sddm.theme = "sugar-dark";
+    services.displayManager.sddm.theme = "catppuccin-mocha";
 
 
     services.displayManager.sddm.wayland.enable = true;
@@ -26,6 +26,8 @@
   kdePackages.isoimagewriter
   kdePackages.kwallet-pam
   kdePackages.kwalletmanager
+  kdePackages.sddm-kcm
+  catppuccin-sddm
   ];
 
   # Optionally set default session (if needed)

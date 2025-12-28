@@ -36,8 +36,11 @@
     ]))
     ffmpeg
     vlc
-   ];
+    gimp
+    handbrake
+    libdvdcss
      
  
+];
 
  }

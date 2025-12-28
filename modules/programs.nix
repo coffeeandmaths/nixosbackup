@@ -7,7 +7,6 @@
     git
     home-manager
     catppuccin-sddm
-    sddm-sugar-dark
     (texlive.combine {
       inherit (texlive)
         # Base + LaTeX
