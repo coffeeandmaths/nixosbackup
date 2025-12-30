@@ -17,7 +17,7 @@
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.useOSProber = false;
   swapDevices = [{ device = "/swapfile"; size = 8192; } ];
   nix.settings = {
     max-jobs = 1;
