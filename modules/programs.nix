@@ -4,13 +4,11 @@
    nixpkgs.config.allowUnfree = true;
    environment.systemPackages = with pkgs; [
     wget
-    camotics
     git
     julia
     tor-browser
     home-manager
     catppuccin-sddm
-    linuxcnc
     (texlive.combine {
       inherit (texlive)
         # Base + LaTeX
