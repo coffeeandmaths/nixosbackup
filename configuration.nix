@@ -36,5 +36,12 @@
   environment.shells = with pkgs; [ bash ];
   users.defaultUserShell = pkgs.bash;
 
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true; # opens the needed ports in the firewall
+  };
+
+
+
 
   }

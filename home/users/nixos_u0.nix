@@ -23,7 +23,6 @@
     obsidian
     pdf2svg
     libreoffice
-    vscode
     texstudio
     sage
     pandoc
@@ -36,8 +35,6 @@
     ]))
     ffmpeg
     vlc
-
- 
 ];
 
  }

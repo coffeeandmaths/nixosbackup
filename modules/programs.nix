@@ -3,9 +3,16 @@
 {
    nixpkgs.config.allowUnfree = true;
    environment.systemPackages = with pkgs; [
+    wineWowPackages.stable
+    winetricks
+    appimage-run
     wget
+    curl
+    openvpn
+    qbittorrent
     git
     julia
+    micro
     tor-browser
     home-manager
     catppuccin-sddm
@@ -39,7 +46,8 @@
     liberation_ttf  # LibreOffice-friendly serif/sans/mono
     jetbrains-mono # optional, if you want for math/code in docs
     gyre-fonts
-  ];
+    ];
+
 
 
 }

@@ -14,5 +14,8 @@
     ExecStart = "${pkgs.systemd}/bin/systemctl restart NetworkManager.service";
   };
  };
+ networking.networkmanager.plugins = with pkgs; [
+    networkmanager-openvpn
+  ];
 
  }
